@@ -7,7 +7,7 @@
 ## 디렉토리 구조
 
 ```
-llm_answer/
+llm_utils/
 ├── gen_llama2_answer.py   # 정답지 생성 스크립트
 ├── requirements.txt       # 필요 패키지 목록
 └── README.md
@@ -20,15 +20,15 @@ llm_answer/
 ### 1. 가상환경 생성 (최초 1회)
 
 ```bash
-# llm_answer/ 내에서 실행
-cd llm_answer
+# llm_utils/ 내에서 실행
+cd llm_utils
 python3 -m venv .venv
 ```
 
 ### 2. 가상환경 활성화
 
 ```bash
-cd llm_answer
+cd llm_utils
 source .venv/bin/activate
 ```
 
