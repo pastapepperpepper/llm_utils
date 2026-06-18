@@ -2,7 +2,7 @@ import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from config import (
     MODEL_ID, DEVICE, TORCH_DTYPE,
-    GEN_INPUT_MODE, GEN_INPUT_TEXT, GEN_INPUT_IDS, MAX_NEW_TOKENS,
+    GEN_INPUT_MODE, GEN_INPUT_TEXT, GEN_INPUT_IDS, MAX_NEW_TOKENS, IGNORE_EOS,
     DO_SAMPLE, TEMPERATURE, REPETITION_PENALTY, TOP_K, TOP_P,
 )
 
@@ -16,6 +16,7 @@ def main():
     print(f"Model ID      : {MODEL_ID}")
     print(f"Device        : {DEVICE}")
     print(f"Torch Dtype   : {TORCH_DTYPE}")
+    print(f"Ignore EOS    : {IGNORE_EOS}")
     print("=" * 50)
     tokenizer = AutoTokenizer.from_pretrained(MODEL_ID)
     model = AutoModelForCausalLM.from_pretrained(
@@ -47,17 +48,29 @@ def main():
     else:
         raise ValueError(f"Unknown GEN_INPUT_MODE: {GEN_INPUT_MODE}. Use 0 (text) or 1 (ids).")
 
+    generate_kwargs = dict(
+        input_ids=input_ids,
+        attention_mask=attention_mask,
+        max_new_tokens=MAX_NEW_TOKENS,
+        do_sample=DO_SAMPLE,
+        temperature=TEMPERATURE,
+        repetition_penalty=REPETITION_PENALTY,
+        top_k=TOP_K,
+        top_p=TOP_P,
+    )
+    if IGNORE_EOS:
+        # eos_token_id=[] 는 transformers 5.x에서 IndexError 발생 → -1 로 EOS stopping 비활성화
+        generate_kwargs["eos_token_id"] = -1
+        generate_kwargs["pad_token_id"] = tokenizer.pad_token_id
+        eos_ids = tokenizer.eos_token_id
+        if eos_ids is None:
+            eos_ids = model.config.eos_token_id
+        if not isinstance(eos_ids, list):
+            eos_ids = [eos_ids]
+        generate_kwargs["suppress_tokens"] = eos_ids
+
     with torch.no_grad():
-        output_ids = model.generate(
-            input_ids=input_ids,
-            attention_mask=attention_mask,
-            max_new_tokens=MAX_NEW_TOKENS,
-            do_sample=DO_SAMPLE,
-            temperature=TEMPERATURE,
-            repetition_penalty=REPETITION_PENALTY,
-            top_k=TOP_K,
-            top_p=TOP_P,
-        )
+        output_ids = model.generate(**generate_kwargs)
 
     generated_ids = output_ids[0][len(input_ids[0]):].tolist()
     generated_text = tokenizer.decode(generated_ids, skip_special_tokens=True)

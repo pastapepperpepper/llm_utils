@@ -1,7 +1,7 @@
 # =============================================================================
 # 공통 설정 (모든 스크립트에서 사용)
 # =============================================================================
-MODEL_ID    = "NousResearch/Llama-2-7b-hf"  # HuggingFace 모델 ID
+MODEL_ID    = "meta-llama/Llama-3.2-3B-Instruct"  # HuggingFace 모델 ID
 DEVICE      = "cuda"                          # "cuda" 또는 "cpu"
 TORCH_DTYPE = "bfloat16"                       # "float16", "bfloat16", "float32"
 
@@ -13,8 +13,9 @@ TORCH_DTYPE = "bfloat16"                       # "float16", "bfloat16", "float32
 #   - 1: GEN_INPUT_IDS를 토큰 ID로 직접 입력
 GEN_INPUT_MODE     = 1       # 입력 모드 선택 (0=text, 1=ids)
 GEN_INPUT_TEXT     = "Hello, my name"  # 입력 프롬프트 (GEN_INPUT_MODE=0일 때 사용)
-GEN_INPUT_IDS      = [2]     # 토큰 ID 리스트 (GEN_INPUT_MODE=1일 때 사용)
-MAX_NEW_TOKENS     = 200      # 생성할 최대 토큰 수
+GEN_INPUT_IDS      = [128000, 9906, 11, 856, 836]     # 토큰 ID 리스트 (GEN_INPUT_MODE=1일 때 사용)
+MAX_NEW_TOKENS     = 1024      # 생성할 최대 토큰 수
+IGNORE_EOS         = True      # True면 EOS 조기 종료 비활성화 (max_new_tokens까지 생성)
 
 # Sampling 파라미터
 # DO_SAMPLE=False 이면 Greedy Search (TEMPERATURE/TOP_K/TOP_P 무시됨)
