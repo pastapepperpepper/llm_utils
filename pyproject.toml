@@ -1,0 +1,48 @@
+[project]
+name = "llm-utils"
+version = "0.1.0"
+description = "rt_simulator_integration 테스트용 골든 출력(정답지) 생성 스크립트 모음"
+readme = "README.md"
+# hyperaccel-sdk 와 동일한 Python / 패키지 버전으로 고정한다.
+# (정답지가 SDK 런타임과 어긋나지 않도록 torch/transformers 등을 일치시킴)
+requires-python = ">=3.10,<3.11"
+dependencies = [
+    "torch==2.10.0",
+    "torchvision==0.25.0",
+    "transformers==4.57.1",
+    "accelerate==1.13.0",
+    "pillow==12.0.0",
+    "numpy<2.0.0",
+]
+
+[tool.uv]
+# 빌드/설치 가능한 패키지가 아니라 스크립트 모음(application)으로 다룬다.
+# 의존성만 .venv에 설치되고 이 프로젝트 자체는 빌드되지 않는다.
+package = false
+
+# transitive 의존성을 hyperaccel-sdk lock 과 100% 동일 버전으로 고정한다.
+# (safetensors=가중치 로딩 / 나머지는 plumbing이라 수치엔 영향 없지만 정답지 재현성을
+#  위해 SDK lock 과 완전 일치시킴. triton 은 torch==2.10.0+cu126 이 3.6.0 을 강제하여
+#  별도 핀 없이 SDK 의 torch 빌드와 일치한다.)
+constraint-dependencies = [
+    "safetensors==0.7.0",
+    "certifi==2026.5.20",
+    "filelock==3.29.1",
+    "fsspec==2026.4.0",
+    "hf-xet==1.5.0",
+    "markupsafe==2.1.5",
+    "sympy==1.13.3",
+    "tqdm==4.68.1",
+]
+
+# torch/torchvision 은 hyperaccel-sdk 와 동일하게 PyTorch cu126(CUDA 12.6) 빌드를
+# 쓴다. (SDK 의 rtl(cuda) 정답지와 동일 빌드 → GPU 수치 일치, CPU 커널도 동일하여
+# torch(cpu) 정답지도 재현됨). 나머지 패키지는 기본 인덱스(nexus 미러)에서 받는다.
+[tool.uv.sources]
+torch = { index = "pytorch-cu126" }
+torchvision = { index = "pytorch-cu126" }
+
+[[tool.uv.index]]
+name = "pytorch-cu126"
+url = "https://download.pytorch.org/whl/cu126"
+explicit = true
