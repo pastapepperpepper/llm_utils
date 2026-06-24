@@ -3,7 +3,7 @@
 # =============================================================================
 MODEL_ID    = "hyper-accel/ci-random-bfloat16-llama3-3b"  # HuggingFace 모델 ID
 TORCH_DTYPE = "bfloat16"                       # "float16", "bfloat16", "float32"
-DEVICE      = "cuda"                          # "cuda" 또는 "cpu"
+DEVICE      = "cpu"                          # "cuda" 또는 "cpu"
 
 # =============================================================================
 # gen_llm_answer.py 설정
