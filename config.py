@@ -31,7 +31,7 @@ TOP_P              = 0.9    # 누적 확률 p 이하 토큰만 후보로 사용
 # =============================================================================
 EXTRACT_MODEL_ID       = "Qwen/Qwen3-VL-2B-Instruct"  # 비전-언어 모델 ID
 EXTRACT_IMAGE_PATH     = "000000002149.jpg"  # 입력 이미지 경로
-EXTRACT_IMAGE_SIZE     = (512, 512)          # (width, height) 고정 리사이즈. None이면 processor smart_resize 사용
+EXTRACT_IMAGE_SIZE     = 512                 # int 면 (size, size) 정사각 resize. (width, height) 튜플도 가능. None이면 processor smart_resize
 EXTRACT_PROMPT         = ""  # 함께 넣을 텍스트 프롬프트
 
 # EXTRACT_LIST_MODULES: True면 모델의 모든 레이어(모듈) 이름을 출력하고 종료
@@ -39,17 +39,18 @@ EXTRACT_PROMPT         = ""  # 함께 넣을 텍스트 프롬프트
 EXTRACT_LIST_MODULES   = False
 
 # EXTRACT_TARGET: 출력을 추출할 대상 지정
+#   "merger"         → 최종 patch merger 출력만 print
 #   ""               → EXTRACT_BLOCK_IDX 로 지정한 vision block 1개의 내부 모듈 전체
-#   "all"            → 모든 vision block 의 최종 출력(block_output)
+#   "all"            → 모든 vision block 내부 + deepstack/final merger
 #   "<module.path>"  → 해당 경로 모듈 + 직속 하위 모듈 출력 (예: "model.visual.blocks.3")
-EXTRACT_TARGET         = ""
+EXTRACT_TARGET         = "merger"
 
-EXTRACT_BLOCK_IDX      = 0      # EXTRACT_TARGET="" 일 때 추출할 vision block 인덱스 (0 ~ 23)
-EXTRACT_INCLUDE_MERGER = False  # True면 merger(patch merger) 출력도 함께 추출 ("" / "all" 모드)
+EXTRACT_BLOCK_IDX      = 5      # EXTRACT_TARGET="" 일 때 추출할 vision block 인덱스 (0 ~ 23)
+EXTRACT_INCLUDE_MERGER = False  # True면 최종 patch merger 내부까지 추출 ("" / "all" 모드). deepstack merger 는 EXTRACT_BLOCK_IDX 가 deepstack layer(예: 5,11,17)일 때 자동 추출
 EXTRACT_VISION_ONLY    = True   # True면 vision 타워만 forward (LLM decoder 미실행). language_model 모듈을 볼 땐 False
-EXTRACT_ATTN_INTERNALS = True   # True면 attn 내부 q/k/v(pre-rope), q/k(post-rope) 도 캡처 ("" / "all" 모드, eager attention)
-EXTRACT_SAVE_PT        = True   # True면 추출한 텐서를 .pt 파일로 저장
-EXTRACT_SAVE_SEPARATE  = True   # True면 레이어별로 "이름_index.pt" 개별 파일 저장 / False면 하나의 .pt로 묶어서 저장
+EXTRACT_ATTN_INTERNALS = False  # True면 attn 내부 q/k/v(pre-rope), q/k(post-rope) 도 캡처 ("" / "all" 모드, eager attention)
+EXTRACT_SAVE_PT        = False  # True면 추출한 텐서를 .pt 파일로 저장
+EXTRACT_SAVE_SEPARATE  = False  # True면 레이어별로 "이름_index.pt" 개별 파일 저장 / False면 하나의 .pt로 묶어서 저장
 EXTRACT_SAVE_DIR       = "layer_outputs"  # 텐서 저장 디렉토리
 
 # =============================================================================

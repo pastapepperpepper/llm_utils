@@ -1,7 +1,7 @@
 import os
 import torch
 from PIL import Image
-from transformers import AutoModelForImageTextToText, AutoProcessor
+from transformers import AutoModelForImageTextToText, Qwen3VLProcessor
 from transformers.models.qwen3_vl.modeling_qwen3_vl import apply_rotary_pos_emb_vision
 from config import (
     EXTRACT_MODEL_ID, DEVICE, TORCH_DTYPE,
@@ -61,6 +61,32 @@ def register_all_blocks_hooks(visual, store):
     handles = []
     for i, block in enumerate(visual.blocks):
         handles += register_block_internal_hooks(block, store, idx=i)
+    return handles
+
+
+def register_merger_internal_hooks(merger, store, prefix):
+    """patch/deepstack merger 내부 모듈 출력을 캡처한다."""
+    return [
+        merger.register_forward_pre_hook(make_pre_hook(store, f"{prefix}_input")),
+        merger.norm.register_forward_hook(make_forward_hook(store, f"{prefix}.norm")),
+        merger.linear_fc1.register_forward_hook(make_forward_hook(store, f"{prefix}.linear_fc1")),
+        merger.act_fn.register_forward_hook(make_forward_hook(store, f"{prefix}.act_fn")),
+        merger.linear_fc2.register_forward_hook(make_forward_hook(store, f"{prefix}.linear_fc2")),
+        merger.register_forward_hook(make_forward_hook(store, prefix)),
+    ]
+
+
+def register_deepstack_merger_hooks(visual, store, block_indices=None):
+    """DeepStack merger 출력을 캡처한다. block_indices 가 None 이면 deepstack layer 전부."""
+    if not hasattr(visual, "deepstack_merger_list"):
+        return []
+    handles = []
+    for layer_num in visual.deepstack_visual_indexes:
+        if block_indices is not None and layer_num not in block_indices:
+            continue
+        merger_idx = visual.deepstack_visual_indexes.index(layer_num)
+        merger = visual.deepstack_merger_list[merger_idx]
+        handles += register_merger_internal_hooks(merger, store, f"deepstack_merger_{layer_num}")
     return handles
 
 
@@ -125,6 +151,8 @@ def main():
         mode_desc = "LIST MODULE NAMES"
     elif target == "all":
         mode_desc = "ALL vision blocks (internals per layer)"
+    elif target == "merger":
+        mode_desc = "final patch merger output only"
     elif target == "":
         mode_desc = f"single vision block [{EXTRACT_BLOCK_IDX}] internals"
     else:
@@ -142,7 +170,8 @@ def main():
     print("=" * 70)
 
     print(f"\nLoading model and processor: {EXTRACT_MODEL_ID}...")
-    processor = AutoProcessor.from_pretrained(EXTRACT_MODEL_ID)
+    processor = Qwen3VLProcessor.from_pretrained(EXTRACT_MODEL_ID)
+    image_processor = processor.image_processor
     model = AutoModelForImageTextToText.from_pretrained(
         EXTRACT_MODEL_ID,
         torch_dtype=dtype,
@@ -166,7 +195,12 @@ def main():
         if EXTRACT_ATTN_INTERNALS:
             patches = [patch_attn_internals(b, store, idx=i) for i, b in enumerate(visual.blocks)]
         if EXTRACT_INCLUDE_MERGER:
-            handles.append(visual.merger.register_forward_hook(make_forward_hook(store, "merger")))
+            handles += register_merger_internal_hooks(visual.merger, store, "merger")
+        handles += register_deepstack_merger_hooks(visual, store)
+    elif target == "merger":
+        handles = [
+            visual.merger.register_forward_hook(make_forward_hook(store, "merger"))
+        ]
     elif target == "":
         num_blocks = len(visual.blocks)
         if not (0 <= EXTRACT_BLOCK_IDX < num_blocks):
@@ -179,42 +213,43 @@ def main():
         if EXTRACT_ATTN_INTERNALS:
             patches = [patch_attn_internals(visual.blocks[EXTRACT_BLOCK_IDX], store, idx=EXTRACT_BLOCK_IDX)]
         if EXTRACT_INCLUDE_MERGER:
-            handles.append(visual.merger.register_forward_hook(make_forward_hook(store, "merger")))
+            handles += register_merger_internal_hooks(visual.merger, store, "merger")
+        if EXTRACT_BLOCK_IDX in visual.deepstack_visual_indexes:
+            handles += register_deepstack_merger_hooks(visual, store, block_indices=[EXTRACT_BLOCK_IDX])
     else:
         handles = register_named_module_hooks(model, target, store)
 
-    # 이미지 + 텍스트 입력 구성 (비전 forward가 돌려면 이미지가 반드시 필요)
-    image = Image.open(EXTRACT_IMAGE_PATH).convert("RGB")
-    processor_kwargs = {}
+    # image_processor 로 pixel_values / image_grid_thw 생성 (apply_chat_template 과 동일 경로)
+    image = Image.open(EXTRACT_IMAGE_PATH)
     if EXTRACT_IMAGE_SIZE is not None:
-        image = image.resize(EXTRACT_IMAGE_SIZE, Image.Resampling.BILINEAR)
-        processor_kwargs["do_resize"] = False
-    messages = [{
-        "role": "user",
-        "content": [
-            {"type": "image", "image": image},
-            {"type": "text", "text": EXTRACT_PROMPT},
-        ],
-    }]
-    apply_kwargs = dict(
-        tokenize=True,
-        add_generation_prompt=True,
-        return_dict=True,
-        return_tensors="pt",
-    )
-    if processor_kwargs:
-        apply_kwargs["processor_kwargs"] = processor_kwargs
-    inputs = processor.apply_chat_template(messages, **apply_kwargs).to(DEVICE)
+        if isinstance(EXTRACT_IMAGE_SIZE, int):
+            image = image.resize((EXTRACT_IMAGE_SIZE, EXTRACT_IMAGE_SIZE))
+        else:
+            image = image.resize(EXTRACT_IMAGE_SIZE)
+    image_inputs = image_processor(image, return_tensors="pt")
+    image_inputs = {k: v.to(DEVICE) for k, v in image_inputs.items()}
 
     with torch.no_grad():
         if EXTRACT_VISION_ONLY:
             # vision 타워만 forward → LLM decoder 미실행
-            if "pixel_values" not in inputs:
-                raise ValueError("이미지 입력이 없어 vision-only forward 불가 (EXTRACT_IMAGE_PATH 확인)")
-            pixel_values = inputs["pixel_values"].to(dtype=dtype)
-            visual(pixel_values, grid_thw=inputs["image_grid_thw"])
+            pixel_values = image_inputs["pixel_values"].to(dtype=dtype)
+            visual(pixel_values, grid_thw=image_inputs["image_grid_thw"])
         else:
             # 전체 forward (language_model 모듈 추출 시 필요)
+            messages = [{
+                "role": "user",
+                "content": [
+                    {"type": "image", "image": image},
+                    {"type": "text", "text": EXTRACT_PROMPT},
+                ],
+            }]
+            inputs = processor.apply_chat_template(
+                messages,
+                tokenize=True,
+                add_generation_prompt=True,
+                return_dict=True,
+                return_tensors="pt",
+            ).to(DEVICE)
             model(**inputs)
 
     for h in handles:
@@ -223,16 +258,31 @@ def main():
         p.remove()
 
     # 결과 출력
-    print("\n" + "=" * 70)
-    print(f"[Outputs]  mode = {mode_desc}")
-    print("-" * 70)
-    print(f"{'name':30s} {'shape':22s} {'mean':>9s} {'std':>9s}")
-    print("-" * 70)
-    for name, t in store.items():
-        tf = t.float()
-        print(f"{name:30s} {str(tuple(t.shape)):22s} "
-              f"{tf.mean().item():9.4f} {tf.std().item():9.4f}")
-    print("=" * 70)
+    if target == "merger":
+        merger_out = store["merger"]
+        print("\n" + "=" * 70)
+        print("[Final Merger Output]")
+        print(f"shape : {tuple(merger_out.shape)}")
+        print(f"dtype : {merger_out.dtype}")
+        tf = merger_out.float()
+        print(f"mean  : {tf.mean().item():.6f}")
+        print(f"std   : {tf.std().item():.6f}")
+        print(f"min   : {tf.min().item():.6f}")
+        print(f"max   : {tf.max().item():.6f}")
+        print("-" * 70)
+        print(merger_out.cpu())
+        print("=" * 70)
+    else:
+        print("\n" + "=" * 70)
+        print(f"[Outputs]  mode = {mode_desc}")
+        print("-" * 70)
+        print(f"{'name':30s} {'shape':22s} {'mean':>9s} {'std':>9s}")
+        print("-" * 70)
+        for name, t in store.items():
+            tf = t.float()
+            print(f"{name:30s} {str(tuple(t.shape)):22s} "
+                  f"{tf.mean().item():9.4f} {tf.std().item():9.4f}")
+        print("=" * 70)
 
     # 텐서 저장 (옵션). store key 에 이미 layer 인덱스가 포함돼 있다 (예: norm1_1, block_output_23)
     if EXTRACT_SAVE_PT:
