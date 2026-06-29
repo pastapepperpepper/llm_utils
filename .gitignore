@@ -10,3 +10,6 @@ venv/
 .DS_Store
 .pytest_cache/
 *.log
+
+# sublayer golden 추출 결과 (텐서 바이너리는 커밋하지 않음)
+golden/

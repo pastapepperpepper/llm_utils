@@ -1,12 +1,12 @@
 import sys
 from pathlib import Path
 
-# config.py 는 프로젝트 루트(core/ 의 상위)에 있으므로 import 경로에 루트를 추가
+# config.py lives at the project root (parent of core/), so add the root to the import path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from enum import IntEnum
 from transformers import AutoTokenizer
-from config import MODEL_ID, TOKENIZER_MODE, TOKENIZER_INPUT_IDS, TOKENIZER_INPUT_TOKENS
+from config import LLM_MODEL_ID, TOKENIZER_MODE, TOKENIZER_INPUT_IDS, TOKENIZER_INPUT_TOKENS
 
 
 class TokenizerMode(IntEnum):
@@ -37,12 +37,12 @@ def tokens_to_ids(tokenizer, tokens):
 
 
 def main():
-    print(f"Loading tokenizer: {MODEL_ID}...")
+    print(f"Loading tokenizer: {LLM_MODEL_ID}...")
     print("\n" + "=" * 50)
     print("[Common Configuration]")
-    print(f"Model ID      : {MODEL_ID}")
+    print(f"Model ID      : {LLM_MODEL_ID}")
     print("=" * 50)
-    tokenizer = AutoTokenizer.from_pretrained(MODEL_ID)
+    tokenizer = AutoTokenizer.from_pretrained(LLM_MODEL_ID)
 
     if TOKENIZER_MODE == TokenizerMode.IDS_TO_TOKENS:
         ids_to_tokens(tokenizer, TOKENIZER_INPUT_IDS)

@@ -1,13 +1,13 @@
 import sys
 from pathlib import Path
 
-# config.py 는 프로젝트 루트(core/ 의 상위)에 있으므로 import 경로에 루트를 추가
+# config.py lives at the project root (parent of core/), so add the root to the import path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from config import (
-    MODEL_ID, DEVICE, TORCH_DTYPE,
+    LLM_MODEL_ID, DEVICE, TORCH_DTYPE,
     GEN_INPUT_MODE, GEN_INPUT_TEXT, GEN_INPUT_IDS, MAX_NEW_TOKENS, IGNORE_EOS,
     DO_SAMPLE, TEMPERATURE, REPETITION_PENALTY, TOP_K, TOP_P,
 )
@@ -16,21 +16,21 @@ from config import (
 def main():
     dtype = getattr(torch, TORCH_DTYPE)
 
-    print(f"Loading LLM model and tokenizer: {MODEL_ID}...")
+    print(f"Loading LLM model and tokenizer: {LLM_MODEL_ID}...")
     print("\n" + "=" * 50)
     print("[Common Configuration]")
-    print(f"Model ID      : {MODEL_ID}")
+    print(f"Model ID      : {LLM_MODEL_ID}")
     print(f"Device        : {DEVICE}")
     print(f"Torch Dtype   : {TORCH_DTYPE}")
     print(f"Ignore EOS    : {IGNORE_EOS}")
     print("=" * 50)
-    tokenizer = AutoTokenizer.from_pretrained(MODEL_ID)
+    tokenizer = AutoTokenizer.from_pretrained(LLM_MODEL_ID)
     model = AutoModelForCausalLM.from_pretrained(
-        MODEL_ID,
+        LLM_MODEL_ID,
         torch_dtype=dtype,
     )
 
-    # Pad 토큰 설정
+    # Pad token setup
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
     if model.config.pad_token_id is None:
@@ -39,7 +39,7 @@ def main():
     model.to(DEVICE)
     model.eval()
 
-    # 입력 모드에 따라 input_ids와 attention_mask 구성
+    # Build input_ids and attention_mask depending on the input mode
     if GEN_INPUT_MODE == 0:  # text mode
         print(f"Input mode: TEXT")
         inputs = tokenizer(GEN_INPUT_TEXT, return_tensors="pt").to(DEVICE)
@@ -65,7 +65,7 @@ def main():
         top_p=TOP_P,
     )
     if IGNORE_EOS:
-        # eos_token_id=[] 는 transformers 5.x에서 IndexError 발생 → -1 로 EOS stopping 비활성화
+        # eos_token_id=[] raises IndexError on transformers 5.x → use -1 to disable EOS stopping
         generate_kwargs["eos_token_id"] = -1
         generate_kwargs["pad_token_id"] = tokenizer.pad_token_id
         eos_ids = tokenizer.eos_token_id
@@ -81,7 +81,7 @@ def main():
     generated_ids = output_ids[0][len(input_ids[0]):].tolist()
     generated_text = tokenizer.decode(generated_ids, skip_special_tokens=True)
     
-    # Input 텍스트 디코딩
+    # Decode the input text
     input_text_decoded = tokenizer.decode(input_ids[0].tolist(), skip_special_tokens=False)
 
     print("\n" + "=" * 50)
