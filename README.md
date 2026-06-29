@@ -1,6 +1,10 @@
 # LLM Utils
 
-LLM tests의 정답지(golden output)를 생성·검증하는 스크립트 모음.
+`hyperaccel-sdk` `rt_simulator_integration` 테스트용 정답지(golden output)를 생성·검증하는 스크립트 모음.
+
+- **LLM 텍스트 생성 정답지** — `core/gen_llm_answer.py`
+- **토큰 ↔ ID 변환 유틸** — `core/tokenizer_utils.py`
+- **Vision(Qwen3-VL) 레이어별 sublayer golden 추출** — `core/sublayer_golden/` (hook 기반)
 
 ---
 
@@ -11,9 +15,15 @@ llm_utils/
 ├── config.py                # 모든 스크립트의 공통/개별 설정 (루트에 유지, 여기만 수정하면 됨)
 ├── core/                    # 실행 스크립트 모음
 │   ├── gen_llm_answer.py    # LLM 텍스트 생성 정답지 스크립트
-│   └── tokenizer_utils.py   # 토큰 ↔ ID 변환 유틸
+│   ├── tokenizer_utils.py   # 토큰 ↔ ID 변환 유틸
+│   └── sublayer_golden/     # 레이어별 sublayer golden 추출 (hook 기반)
+│       ├── engine.py        #   모델 무관 hook 엔진
+│       ├── spec.py          #   ModelSpec + 레지스트리 + tap(경로 템플릿) 해석
+│       ├── specs/           #   모델별 기술자 (qwen3_vl.py ...)
+│       └── vision.py        #   vision 도메인 진입점
 ├── input/                   # 입력 데이터 (이미지 등)
 │   └── 000000002149.jpg     # 샘플 입력 이미지
+├── golden/                  # 추출된 sublayer 텐서(.pt) 저장 위치 (.gitignore, 비커밋)
 ├── pyproject.toml           # 프로젝트 메타 + 의존성 (uv source of truth)
 ├── uv.lock                  # 잠금된 의존성 버전 (재현성 보장, 커밋함)
 ├── .python-version          # Python 3.10 고정 (hyperaccel-sdk와 일치)
@@ -50,8 +60,9 @@ uv sync          # .venv 자동 생성 후 uv.lock 기준으로 패키지 설치
 가상환경을 직접 활성화하지 않고 `uv run`으로 실행하는 것을 권장한다(자동으로 `.venv` 사용).
 
 ```bash
-uv run core/gen_llm_answer.py   # LLM 텍스트 생성
-uv run core/tokenizer_utils.py  # 토큰 ↔ ID 변환
+uv run core/gen_llm_answer.py          # LLM 텍스트 생성
+uv run core/tokenizer_utils.py         # 토큰 ↔ ID 변환
+uv run core/sublayer_golden/vision.py  # Qwen3-VL vision sublayer golden 추출
 ```
 
 또는 가상환경을 활성화한 뒤 실행해도 된다.
@@ -97,13 +108,19 @@ DEVICE = "cpu"    # GPU 없는 머신에서 실행
 
 ### 공통 설정 (`config.py` 상단)
 
+설정은 적용 범위에 따라 구분된다 — **`DEVICE` 만 전 스크립트 공통**이고,
+모델/dtype 은 LLM 스크립트 전용(`LLM_*` / `TORCH_DTYPE`), vision 은 별도 `VL_*` 를 쓴다.
+
 ```python
-MODEL_ID    = "hyper-accel/ci-random-bfloat16-llama3-3b"  # HuggingFace 모델 ID
-TORCH_DTYPE = "bfloat16"   # "float16", "bfloat16", "float32"
-DEVICE      = "cuda"       # "cuda" 또는 "cpu"
+# 전체 공통 (모든 스크립트)
+DEVICE       = "cuda"       # "cuda" 또는 "cpu"
+
+# LLM 전용 (gen_llm_answer.py / tokenizer_utils.py)
+LLM_MODEL_ID = "hyper-accel/ci-random-bfloat16-llama3-3b"  # HuggingFace 모델 ID
+TORCH_DTYPE  = "bfloat16"   # "float16", "bfloat16", "float32" (gen_llm_answer 전용)
 ```
 
-> **정답지 대응 관계**
+> **정답지 대응 관계** (`DEVICE`)
 > - `DEVICE = "cpu"` 로 실행한 결과 → `rt_simulator_integration` 테스트의 **torch 모드** 정답지
 > - `DEVICE = "cuda"` 로 실행한 결과 → `rt_simulator_integration` 테스트의 **rtl 모드** 정답지
 
@@ -124,3 +141,41 @@ TOP_P              = 0.9
 ```
 
 > **정답지 생성 시 주의**: `DO_SAMPLE=False` (Greedy)로 실행해야 동일 입력에 항상 동일 결과가 나온다.
+
+### Vision sublayer golden 추출 설정 (`core/sublayer_golden/vision.py`)
+
+Qwen3-VL vision tower 를 **1회 forward** 하면서 각 레이어의 sublayer 중간 출력을
+forward hook 으로 캡처해 `.pt` 로 저장한다. 입력은 sim 이 소비한 `input_tensor.pt` 를
+그대로 재사용해 **HW(sim)와 동일 입력**을 보장한다.
+
+```python
+VL_MODEL_ID     = "Qwen/Qwen3-VL-2B-Instruct"
+VL_SDK_DATA_DIR = "/root/hyperaccel-sdk/tests/rt_simulator_integration/data"  # input_tensor.pt 재사용
+VL_IMAGE_PATH   = ".../000000002149.jpg"   # grid_thw 재계산용 (sim 과 동일 이미지)
+VL_IMAGE_SIZE   = 512                       # 512/patch16 → 32×32 = 1024 patch
+VL_SAVE_DIR     = "golden/sublayer/qwen3_vl"
+VL_SAVE_DTYPE   = "bfloat16"                # HW 와 동일 (검사 편의용 "float32" 도 가능)
+VL_TAPS         = []                        # [] = 전체 레이어 × 전체 sublayer 자동 덤프
+```
+
+**`VL_TAPS` 로 특정 지점만 뽑기** (예시):
+
+```python
+VL_TAPS = [(0, "mlp_linear_fc1"),   # layer 0 의 FFN up-proj 출력
+           (1, "norm2"),            # layer 1 의 post-attn LayerNorm
+           ("global", "merger_out")]# 최종 merger 출력
+```
+
+- `(정수 layer, "sublayer명")` → 해당 block sublayer / `("global", "sublayer명")` → 전역 모듈
+- sublayer명(block): `norm1 / attn_qkv / attn_proj / attn / norm2 / mlp_linear_fc1 / mlp_act / mlp_linear_fc2 / block`
+- sublayer명(global): `merger_norm / merger_fc1 / merger_act / merger_out`
+- 저장 파일: `{VL_SAVE_DIR}/{sublayer명}_{layer}.pt` (전역은 `{sublayer명}.pt`)
+
+```bash
+uv run core/sublayer_golden/vision.py
+```
+
+> **확장**: 새 모델은 `core/sublayer_golden/specs/` 에 spec(경로 템플릿 dict) 하나만
+> 추가하면 된다(엔진/진입점 불변).
+> **범위**: 현재는 **golden(레퍼런스) 생성 전용**이다. golden↔HW(sim) sublayer 자동
+> 비교는 SDK 측 연결(디버그 offset/executor 배선) 이후 단계다.
