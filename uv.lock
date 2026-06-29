@@ -1,0 +1,687 @@
+version = 1
+revision = 3
+requires-python = "==3.10.*"
+
+[manifest]
+constraints = [
+    { name = "certifi", specifier = "==2026.5.20" },
+    { name = "filelock", specifier = "==3.29.1" },
+    { name = "fsspec", specifier = "==2026.4.0" },
+    { name = "hf-xet", specifier = "==1.5.0" },
+    { name = "markupsafe", specifier = "==2.1.5" },
+    { name = "safetensors", specifier = "==0.7.0" },
+    { name = "sympy", specifier = "==1.13.3" },
+    { name = "tqdm", specifier = "==4.68.1" },
+]
+
+[[package]]
+name = "accelerate"
+version = "1.13.0"
+source = { registry = "http://nexus.hyperaccel.ai/repository/pypi-group/simple/" }
+dependencies = [
+    { name = "huggingface-hub" },
+    { name = "numpy" },
+    { name = "packaging" },
+    { name = "psutil" },
+    { name = "pyyaml" },
+    { name = "safetensors" },
+    { name = "torch" },
+]
+sdist = { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/accelerate/1.13.0/accelerate-1.13.0.tar.gz", hash = "sha256:d631b4e0f5b3de4aff2d7e9e6857d164810dfc3237d54d017f075122d057b236" }
+wheels = [
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/accelerate/1.13.0/accelerate-1.13.0-py3-none-any.whl", hash = "sha256:cf1a3efb96c18f7b152eb0fa7490f3710b19c3f395699358f08decca2b8b62e0" },
+]
+
+[[package]]
+name = "certifi"
+version = "2026.5.20"
+source = { registry = "http://nexus.hyperaccel.ai/repository/pypi-group/simple/" }
+sdist = { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/certifi/2026.5.20/certifi-2026.5.20.tar.gz", hash = "sha256:69dea482ab64caa7b9f6aba1c6bf48bb6a5448d1c0f1b17ab42ad8c763a5344d" }
+wheels = [
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/certifi/2026.5.20/certifi-2026.5.20-py3-none-any.whl", hash = "sha256:3c52e209ba0a4ad7aebe60436a4ab349c39e1e602e8c134221e546902ad25897" },
+]
+
+[[package]]
+name = "charset-normalizer"
+version = "3.4.7"
+source = { registry = "http://nexus.hyperaccel.ai/repository/pypi-group/simple/" }
+sdist = { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/charset-normalizer/3.4.7/charset_normalizer-3.4.7.tar.gz", hash = "sha256:ae89db9e5f98a11a4bf50407d4363e7b09b31e55bc117b4f7d80aab97ba009e5" }
+wheels = [
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/charset-normalizer/3.4.7/charset_normalizer-3.4.7-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:cdd68a1fb318e290a2077696b7eb7a21a49163c455979c639bf5a5dcdc46617d" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/charset-normalizer/3.4.7/charset_normalizer-3.4.7-cp310-cp310-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:e17b8d5d6a8c47c85e68ca8379def1303fd360c3e22093a807cd34a71cd082b8" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/charset-normalizer/3.4.7/charset_normalizer-3.4.7-cp310-cp310-manylinux2014_ppc64le.manylinux_2_17_ppc64le.manylinux_2_28_ppc64le.whl", hash = "sha256:511ef87c8aec0783e08ac18565a16d435372bc1ac25a91e6ac7f5ef2b0bff790" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/charset-normalizer/3.4.7/charset_normalizer-3.4.7-cp310-cp310-manylinux2014_s390x.manylinux_2_17_s390x.manylinux_2_28_s390x.whl", hash = "sha256:007d05ec7321d12a40227aae9e2bc6dca73f3cb21058999a1df9e193555a9dcc" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/charset-normalizer/3.4.7/charset_normalizer-3.4.7-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:cf29836da5119f3c8a8a70667b0ef5fdca3bb12f80fd06487cfa575b3909b393" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/charset-normalizer/3.4.7/charset_normalizer-3.4.7-cp310-cp310-manylinux_2_31_armv7l.whl", hash = "sha256:12d8baf840cc7889b37c7c770f478adea7adce3dcb3944d02ec87508e2dcf153" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/charset-normalizer/3.4.7/charset_normalizer-3.4.7-cp310-cp310-manylinux_2_31_riscv64.manylinux_2_39_riscv64.whl", hash = "sha256:d560742f3c0d62afaccf9f41fe485ed69bd7661a241f86a3ef0f0fb8b1a397af" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/charset-normalizer/3.4.7/charset_normalizer-3.4.7-cp310-cp310-musllinux_1_2_aarch64.whl", hash = "sha256:b14b2d9dac08e28bb8046a1a0434b1750eb221c8f5b87a68f4fa11a6f97b5e34" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/charset-normalizer/3.4.7/charset_normalizer-3.4.7-cp310-cp310-musllinux_1_2_armv7l.whl", hash = "sha256:bc17a677b21b3502a21f66a8cc64f5bfad4df8a0b8434d661666f8ce90ac3af1" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/charset-normalizer/3.4.7/charset_normalizer-3.4.7-cp310-cp310-musllinux_1_2_ppc64le.whl", hash = "sha256:750e02e074872a3fad7f233b47734166440af3cdea0add3e95163110816d6752" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/charset-normalizer/3.4.7/charset_normalizer-3.4.7-cp310-cp310-musllinux_1_2_riscv64.whl", hash = "sha256:4e5163c14bffd570ef2affbfdd77bba66383890797df43dc8b4cc7d6f500bf53" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/charset-normalizer/3.4.7/charset_normalizer-3.4.7-cp310-cp310-musllinux_1_2_s390x.whl", hash = "sha256:6ed74185b2db44f41ef35fd1617c5888e59792da9bbc9190d6c7300617182616" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/charset-normalizer/3.4.7/charset_normalizer-3.4.7-cp310-cp310-musllinux_1_2_x86_64.whl", hash = "sha256:94e1885b270625a9a828c9793b4d52a64445299baa1fea5a173bf1d3dd9a1a5a" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/charset-normalizer/3.4.7/charset_normalizer-3.4.7-cp310-cp310-win32.whl", hash = "sha256:6785f414ae0f3c733c437e0f3929197934f526d19dfaa75e18fdb4f94c6fb374" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/charset-normalizer/3.4.7/charset_normalizer-3.4.7-cp310-cp310-win_amd64.whl", hash = "sha256:6696b7688f54f5af4462118f0bfa7c1621eeb87154f77fa04b9295ce7a8f2943" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/charset-normalizer/3.4.7/charset_normalizer-3.4.7-cp310-cp310-win_arm64.whl", hash = "sha256:66671f93accb62ed07da56613636f3641f1a12c13046ce91ffc923721f23c008" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/charset-normalizer/3.4.7/charset_normalizer-3.4.7-py3-none-any.whl", hash = "sha256:3dce51d0f5e7951f8bb4900c257dad282f49190fdbebecd4ba99bcc41fef404d" },
+]
+
+[[package]]
+name = "colorama"
+version = "0.4.6"
+source = { registry = "http://nexus.hyperaccel.ai/repository/pypi-group/simple/" }
+sdist = { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/colorama/0.4.6/colorama-0.4.6.tar.gz", hash = "sha256:08695f5cb7ed6e0531a20572697297273c47b8cae5a63ffc6d6ed5c201be6e44" }
+wheels = [
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/colorama/0.4.6/colorama-0.4.6-py2.py3-none-any.whl", hash = "sha256:4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6" },
+]
+
+[[package]]
+name = "cuda-bindings"
+version = "12.9.4"
+source = { registry = "http://nexus.hyperaccel.ai/repository/pypi-group/simple/" }
+dependencies = [
+    { name = "cuda-pathfinder" },
+]
+wheels = [
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/cuda-bindings/12.9.4/cuda_bindings-12.9.4-cp310-cp310-manylinux_2_24_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:a022c96b8bd847e8dc0675523431149a4c3e872f440e3002213dbb9e08f0331a" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/cuda-bindings/12.9.4/cuda_bindings-12.9.4-cp310-cp310-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:4d3c842c2a4303b2a580fe955018e31aea30278be19795ae05226235268032e5" },
+]
+
+[[package]]
+name = "cuda-pathfinder"
+version = "1.5.5"
+source = { registry = "http://nexus.hyperaccel.ai/repository/pypi-group/simple/" }
+wheels = [
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/cuda-pathfinder/1.5.5/cuda_pathfinder-1.5.5-py3-none-any.whl", hash = "sha256:0228c023f95d1480f143ef5c8922d27a2ab052087a942e81dc289c9eb8f91689" },
+]
+
+[[package]]
+name = "filelock"
+version = "3.29.1"
+source = { registry = "http://nexus.hyperaccel.ai/repository/pypi-group/simple/" }
+sdist = { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/filelock/3.29.1/filelock-3.29.1.tar.gz", hash = "sha256:d97e6b1b9757569626c58caa07dc4beb1613f4a2938b1e8cc81afca398906c9e" }
+wheels = [
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/filelock/3.29.1/filelock-3.29.1-py3-none-any.whl", hash = "sha256:85199dfd706869641b72b2e8955d5416a4b2b7dc4b0e8e6d97b4cc1299a6983b" },
+]
+
+[[package]]
+name = "fsspec"
+version = "2026.4.0"
+source = { registry = "http://nexus.hyperaccel.ai/repository/pypi-group/simple/" }
+sdist = { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/fsspec/2026.4.0/fsspec-2026.4.0.tar.gz", hash = "sha256:301d8ac70ae90ef3ad05dcf94d6c3754a097f9b5fe4667d2787aa359ec7df7e4" }
+wheels = [
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/fsspec/2026.4.0/fsspec-2026.4.0-py3-none-any.whl", hash = "sha256:11ef7bb35dab8a394fde6e608221d5cf3e8499401c249bebaeaad760a1a8dec2" },
+]
+
+[[package]]
+name = "hf-xet"
+version = "1.5.0"
+source = { registry = "http://nexus.hyperaccel.ai/repository/pypi-group/simple/" }
+sdist = { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/hf-xet/1.5.0/hf_xet-1.5.0.tar.gz", hash = "sha256:e0fb0a34d9f406eed88233e829a67ec016bec5af19e480eac65a233ea289a948" }
+wheels = [
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/hf-xet/1.5.0/hf_xet-1.5.0-cp37-abi3-macosx_10_12_x86_64.whl", hash = "sha256:dad0dc84e941b8ba3c860659fe1fdc35c049d47cce293f003287757e971a8f56" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/hf-xet/1.5.0/hf_xet-1.5.0-cp37-abi3-macosx_11_0_arm64.whl", hash = "sha256:fd6e5a9b0fdac4ed03ed45ef79254a655b1aaab514a02202617fbf643f5fdf7a" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/hf-xet/1.5.0/hf_xet-1.5.0-cp37-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:3531b1823a0e6d77d80f9ed15ca0e00f0d115094f8ac033d5cae88f4564cc949" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/hf-xet/1.5.0/hf_xet-1.5.0-cp37-abi3-manylinux_2_28_aarch64.whl", hash = "sha256:9a0ee58cd18d5ea799f7ed11290bbccbe56bdd8b1d97ca74b9cc49a3945d7a3b" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/hf-xet/1.5.0/hf_xet-1.5.0-cp37-abi3-musllinux_1_2_aarch64.whl", hash = "sha256:1e60df5a42e9bed8628b6416af2cba4cba57ae9f02de226a06b020d98e1aab18" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/hf-xet/1.5.0/hf_xet-1.5.0-cp37-abi3-musllinux_1_2_x86_64.whl", hash = "sha256:4b35549ce62601b84da4ff9b24d970032ace3d4430f52d91bcbb26c901d6c690" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/hf-xet/1.5.0/hf_xet-1.5.0-cp37-abi3-win_amd64.whl", hash = "sha256:2806c7c17b4d23f8d88f7c4814f838c3b6150773fe339c20af23e1cfaf2797e4" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/hf-xet/1.5.0/hf_xet-1.5.0-cp37-abi3-win_arm64.whl", hash = "sha256:b6c9df403040248c76d808d3e047d64db2d923bae593eb244c41e425cf6cd7be" },
+]
+
+[[package]]
+name = "huggingface-hub"
+version = "0.36.2"
+source = { registry = "http://nexus.hyperaccel.ai/repository/pypi-group/simple/" }
+dependencies = [
+    { name = "filelock" },
+    { name = "fsspec" },
+    { name = "hf-xet", marker = "platform_machine == 'aarch64' or platform_machine == 'amd64' or platform_machine == 'arm64' or platform_machine == 'x86_64'" },
+    { name = "packaging" },
+    { name = "pyyaml" },
+    { name = "requests" },
+    { name = "tqdm" },
+    { name = "typing-extensions" },
+]
+sdist = { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/huggingface-hub/0.36.2/huggingface_hub-0.36.2.tar.gz", hash = "sha256:1934304d2fb224f8afa3b87007d58501acfda9215b334eed53072dd5e815ff7a" }
+wheels = [
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/huggingface-hub/0.36.2/huggingface_hub-0.36.2-py3-none-any.whl", hash = "sha256:48f0c8eac16145dfce371e9d2d7772854a4f591bcb56c9cf548accf531d54270" },
+]
+
+[[package]]
+name = "idna"
+version = "3.18"
+source = { registry = "http://nexus.hyperaccel.ai/repository/pypi-group/simple/" }
+sdist = { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/idna/3.18/idna-3.18.tar.gz", hash = "sha256:ffb385a7e039654cef1ab9ef32c6fafe283c0c0467bba1d9029738ce4a14a848" }
+wheels = [
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/idna/3.18/idna-3.18-py3-none-any.whl", hash = "sha256:7f952cbe720b688055e3f87de14f5c3e5fdaa8bc3928985c4077ca689de849a2" },
+]
+
+[[package]]
+name = "jinja2"
+version = "3.1.6"
+source = { registry = "http://nexus.hyperaccel.ai/repository/pypi-group/simple/" }
+dependencies = [
+    { name = "markupsafe" },
+]
+sdist = { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/jinja2/3.1.6/jinja2-3.1.6.tar.gz", hash = "sha256:0137fb05990d35f1275a587e9aee6d56da821fc83491a0fb838183be43f66d6d" }
+wheels = [
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/jinja2/3.1.6/jinja2-3.1.6-py3-none-any.whl", hash = "sha256:85ece4451f492d0c13c5dd7c13a64681a86afae63a5f347908daf103ce6d2f67" },
+]
+
+[[package]]
+name = "llm-utils"
+version = "0.1.0"
+source = { virtual = "." }
+dependencies = [
+    { name = "accelerate" },
+    { name = "numpy" },
+    { name = "pillow" },
+    { name = "torch" },
+    { name = "torchvision" },
+    { name = "transformers" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "accelerate", specifier = "==1.13.0" },
+    { name = "numpy", specifier = "<2.0.0" },
+    { name = "pillow", specifier = "==12.0.0" },
+    { name = "torch", specifier = "==2.10.0", index = "https://download.pytorch.org/whl/cu126" },
+    { name = "torchvision", specifier = "==0.25.0", index = "https://download.pytorch.org/whl/cu126" },
+    { name = "transformers", specifier = "==4.57.1" },
+]
+
+[[package]]
+name = "markupsafe"
+version = "2.1.5"
+source = { registry = "http://nexus.hyperaccel.ai/repository/pypi-group/simple/" }
+sdist = { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/markupsafe/2.1.5/MarkupSafe-2.1.5.tar.gz", hash = "sha256:d283d37a890ba4c1ae73ffadf8046435c76e7bc2247bbb63c00bd1a709c6544b" }
+wheels = [
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/markupsafe/2.1.5/MarkupSafe-2.1.5-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:a17a92de5231666cfbe003f0e4b9b3a7ae3afb1ec2845aadc2bacc93ff85febc" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/markupsafe/2.1.5/MarkupSafe-2.1.5-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:72b6be590cc35924b02c78ef34b467da4ba07e4e0f0454a2c5907f473fc50ce5" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/markupsafe/2.1.5/MarkupSafe-2.1.5-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:e61659ba32cf2cf1481e575d0462554625196a1f2fc06a1c777d3f48e8865d46" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/markupsafe/2.1.5/MarkupSafe-2.1.5-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:2174c595a0d73a3080ca3257b40096db99799265e1c27cc5a610743acd86d62f" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/markupsafe/2.1.5/MarkupSafe-2.1.5-cp310-cp310-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:ae2ad8ae6ebee9d2d94b17fb62763125f3f374c25618198f40cbb8b525411900" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/markupsafe/2.1.5/MarkupSafe-2.1.5-cp310-cp310-musllinux_1_1_aarch64.whl", hash = "sha256:075202fa5b72c86ad32dc7d0b56024ebdbcf2048c0ba09f1cde31bfdd57bcfff" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/markupsafe/2.1.5/MarkupSafe-2.1.5-cp310-cp310-musllinux_1_1_i686.whl", hash = "sha256:598e3276b64aff0e7b3451b72e94fa3c238d452e7ddcd893c3ab324717456bad" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/markupsafe/2.1.5/MarkupSafe-2.1.5-cp310-cp310-musllinux_1_1_x86_64.whl", hash = "sha256:fce659a462a1be54d2ffcacea5e3ba2d74daa74f30f5f143fe0c58636e355fdd" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/markupsafe/2.1.5/MarkupSafe-2.1.5-cp310-cp310-win32.whl", hash = "sha256:d9fad5155d72433c921b782e58892377c44bd6252b5af2f67f16b194987338a4" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/markupsafe/2.1.5/MarkupSafe-2.1.5-cp310-cp310-win_amd64.whl", hash = "sha256:bf50cd79a75d181c9181df03572cdce0fbb75cc353bc350712073108cba98de5" },
+]
+
+[[package]]
+name = "mpmath"
+version = "1.3.0"
+source = { registry = "http://nexus.hyperaccel.ai/repository/pypi-group/simple/" }
+sdist = { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/mpmath/1.3.0/mpmath-1.3.0.tar.gz", hash = "sha256:7a28eb2a9774d00c7bc92411c19a89209d5da7c4c9a9e227be8330a23a25b91f" }
+wheels = [
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/mpmath/1.3.0/mpmath-1.3.0-py3-none-any.whl", hash = "sha256:a0b2b9fe80bbcd81a6647ff13108738cfb482d481d826cc0e02f5b35e5c88d2c" },
+]
+
+[[package]]
+name = "networkx"
+version = "3.4.2"
+source = { registry = "http://nexus.hyperaccel.ai/repository/pypi-group/simple/" }
+sdist = { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/networkx/3.4.2/networkx-3.4.2.tar.gz", hash = "sha256:307c3669428c5362aab27c8a1260aa8f47c4e91d3891f48be0141738d8d053e1" }
+wheels = [
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/networkx/3.4.2/networkx-3.4.2-py3-none-any.whl", hash = "sha256:df5d4365b724cf81b8c6a7312509d0c22386097011ad1abe274afd5e9d3bbc5f" },
+]
+
+[[package]]
+name = "numpy"
+version = "1.26.4"
+source = { registry = "http://nexus.hyperaccel.ai/repository/pypi-group/simple/" }
+sdist = { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/numpy/1.26.4/numpy-1.26.4.tar.gz", hash = "sha256:2a02aba9ed12e4ac4eb3ea9421c420301a0c6460d9830d74a9df87efa4912010" }
+wheels = [
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/numpy/1.26.4/numpy-1.26.4-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:9ff0f4f29c51e2803569d7a51c2304de5554655a60c5d776e35b4a41413830d0" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/numpy/1.26.4/numpy-1.26.4-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:2e4ee3380d6de9c9ec04745830fd9e2eccb3e6cf790d39d7b98ffd19b0dd754a" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/numpy/1.26.4/numpy-1.26.4-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:d209d8969599b27ad20994c8e41936ee0964e6da07478d6c35016bc386b66ad4" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/numpy/1.26.4/numpy-1.26.4-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:ffa75af20b44f8dba823498024771d5ac50620e6915abac414251bd971b4529f" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/numpy/1.26.4/numpy-1.26.4-cp310-cp310-musllinux_1_1_aarch64.whl", hash = "sha256:62b8e4b1e28009ef2846b4c7852046736bab361f7aeadeb6a5b89ebec3c7055a" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/numpy/1.26.4/numpy-1.26.4-cp310-cp310-musllinux_1_1_x86_64.whl", hash = "sha256:a4abb4f9001ad2858e7ac189089c42178fcce737e4169dc61321660f1a96c7d2" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/numpy/1.26.4/numpy-1.26.4-cp310-cp310-win32.whl", hash = "sha256:bfe25acf8b437eb2a8b2d49d443800a5f18508cd811fea3181723922a8a82b07" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/numpy/1.26.4/numpy-1.26.4-cp310-cp310-win_amd64.whl", hash = "sha256:b97fe8060236edf3662adfc2c633f56a08ae30560c56310562cb4f95500022d5" },
+]
+
+[[package]]
+name = "nvidia-cublas-cu12"
+version = "12.6.4.1"
+source = { registry = "http://nexus.hyperaccel.ai/repository/pypi-group/simple/" }
+wheels = [
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/nvidia-cublas-cu12/12.6.4.1/nvidia_cublas_cu12-12.6.4.1-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:08ed2686e9875d01b58e3cb379c6896df8e76c75e0d4a7f7dace3d7b6d9ef8eb" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/nvidia-cublas-cu12/12.6.4.1/nvidia_cublas_cu12-12.6.4.1-py3-none-manylinux_2_27_aarch64.whl", hash = "sha256:235f728d6e2a409eddf1df58d5b0921cf80cfa9e72b9f2775ccb7b4a87984668" },
+]
+
+[[package]]
+name = "nvidia-cuda-cupti-cu12"
+version = "12.6.80"
+source = { registry = "http://nexus.hyperaccel.ai/repository/pypi-group/simple/" }
+wheels = [
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/nvidia-cuda-cupti-cu12/12.6.80/nvidia_cuda_cupti_cu12-12.6.80-py3-none-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:166ee35a3ff1587f2490364f90eeeb8da06cd867bd5b701bf7f9a02b78bc63fc" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/nvidia-cuda-cupti-cu12/12.6.80/nvidia_cuda_cupti_cu12-12.6.80-py3-none-manylinux2014_aarch64.whl", hash = "sha256:358b4a1d35370353d52e12f0a7d1769fc01ff74a191689d3870b2123156184c4" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/nvidia-cuda-cupti-cu12/12.6.80/nvidia_cuda_cupti_cu12-12.6.80-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:6768bad6cab4f19e8292125e5f1ac8aa7d1718704012a0e3272a6f61c4bce132" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/nvidia-cuda-cupti-cu12/12.6.80/nvidia_cuda_cupti_cu12-12.6.80-py3-none-manylinux2014_x86_64.whl", hash = "sha256:a3eff6cdfcc6a4c35db968a06fcadb061cbc7d6dde548609a941ff8701b98b73" },
+]
+
+[[package]]
+name = "nvidia-cuda-nvrtc-cu12"
+version = "12.6.77"
+source = { registry = "http://nexus.hyperaccel.ai/repository/pypi-group/simple/" }
+wheels = [
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/nvidia-cuda-nvrtc-cu12/12.6.77/nvidia_cuda_nvrtc_cu12-12.6.77-py3-none-manylinux2014_aarch64.whl", hash = "sha256:5847f1d6e5b757f1d2b3991a01082a44aad6f10ab3c5c0213fa3e25bddc25a13" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/nvidia-cuda-nvrtc-cu12/12.6.77/nvidia_cuda_nvrtc_cu12-12.6.77-py3-none-manylinux2014_x86_64.whl", hash = "sha256:35b0cc6ee3a9636d5409133e79273ce1f3fd087abb0532d2d2e8fff1fe9efc53" },
+]
+
+[[package]]
+name = "nvidia-cuda-runtime-cu12"
+version = "12.6.77"
+source = { registry = "http://nexus.hyperaccel.ai/repository/pypi-group/simple/" }
+wheels = [
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/nvidia-cuda-runtime-cu12/12.6.77/nvidia_cuda_runtime_cu12-12.6.77-py3-none-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:6116fad3e049e04791c0256a9778c16237837c08b27ed8c8401e2e45de8d60cd" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/nvidia-cuda-runtime-cu12/12.6.77/nvidia_cuda_runtime_cu12-12.6.77-py3-none-manylinux2014_aarch64.whl", hash = "sha256:d461264ecb429c84c8879a7153499ddc7b19b5f8d84c204307491989a365588e" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/nvidia-cuda-runtime-cu12/12.6.77/nvidia_cuda_runtime_cu12-12.6.77-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:ba3b56a4f896141e25e19ab287cd71e52a6a0f4b29d0d31609f60e3b4d5219b7" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/nvidia-cuda-runtime-cu12/12.6.77/nvidia_cuda_runtime_cu12-12.6.77-py3-none-manylinux2014_x86_64.whl", hash = "sha256:a84d15d5e1da416dd4774cb42edf5e954a3e60cc945698dc1d5be02321c44dc8" },
+]
+
+[[package]]
+name = "nvidia-cudnn-cu12"
+version = "9.10.2.21"
+source = { registry = "http://nexus.hyperaccel.ai/repository/pypi-group/simple/" }
+dependencies = [
+    { name = "nvidia-cublas-cu12" },
+]
+wheels = [
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/nvidia-cudnn-cu12/9.10.2.21/nvidia_cudnn_cu12-9.10.2.21-py3-none-manylinux_2_27_aarch64.whl", hash = "sha256:c9132cc3f8958447b4910a1720036d9eff5928cc3179b0a51fb6d167c6cc87d8" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/nvidia-cudnn-cu12/9.10.2.21/nvidia_cudnn_cu12-9.10.2.21-py3-none-manylinux_2_27_x86_64.whl", hash = "sha256:949452be657fa16687d0930933f032835951ef0892b37d2d53824d1a84dc97a8" },
+]
+
+[[package]]
+name = "nvidia-cufft-cu12"
+version = "11.3.0.4"
+source = { registry = "http://nexus.hyperaccel.ai/repository/pypi-group/simple/" }
+dependencies = [
+    { name = "nvidia-nvjitlink-cu12" },
+]
+wheels = [
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/nvidia-cufft-cu12/11.3.0.4/nvidia_cufft_cu12-11.3.0.4-py3-none-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:d16079550df460376455cba121db6564089176d9bac9e4f360493ca4741b22a6" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/nvidia-cufft-cu12/11.3.0.4/nvidia_cufft_cu12-11.3.0.4-py3-none-manylinux2014_aarch64.whl", hash = "sha256:8510990de9f96c803a051822618d42bf6cb8f069ff3f48d93a8486efdacb48fb" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/nvidia-cufft-cu12/11.3.0.4/nvidia_cufft_cu12-11.3.0.4-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:ccba62eb9cef5559abd5e0d54ceed2d9934030f51163df018532142a8ec533e5" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/nvidia-cufft-cu12/11.3.0.4/nvidia_cufft_cu12-11.3.0.4-py3-none-manylinux2014_x86_64.whl", hash = "sha256:768160ac89f6f7b459bee747e8d175dbf53619cfe74b2a5636264163138013ca" },
+]
+
+[[package]]
+name = "nvidia-cufile-cu12"
+version = "1.11.1.6"
+source = { registry = "http://nexus.hyperaccel.ai/repository/pypi-group/simple/" }
+wheels = [
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/nvidia-cufile-cu12/1.11.1.6/nvidia_cufile_cu12-1.11.1.6-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:cc23469d1c7e52ce6c1d55253273d32c565dd22068647f3aa59b3c6b005bf159" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/nvidia-cufile-cu12/1.11.1.6/nvidia_cufile_cu12-1.11.1.6-py3-none-manylinux_2_27_aarch64.whl", hash = "sha256:8f57a0051dcf2543f6dc2b98a98cb2719c37d3cee1baba8965d57f3bbc90d4db" },
+]
+
+[[package]]
+name = "nvidia-curand-cu12"
+version = "10.3.7.77"
+source = { registry = "http://nexus.hyperaccel.ai/repository/pypi-group/simple/" }
+wheels = [
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/nvidia-curand-cu12/10.3.7.77/nvidia_curand_cu12-10.3.7.77-py3-none-manylinux2014_aarch64.whl", hash = "sha256:6e82df077060ea28e37f48a3ec442a8f47690c7499bff392a5938614b56c98d8" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/nvidia-curand-cu12/10.3.7.77/nvidia_curand_cu12-10.3.7.77-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:a42cd1344297f70b9e39a1e4f467a4e1c10f1da54ff7a85c12197f6c652c8bdf" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/nvidia-curand-cu12/10.3.7.77/nvidia_curand_cu12-10.3.7.77-py3-none-manylinux2014_x86_64.whl", hash = "sha256:99f1a32f1ac2bd134897fc7a203f779303261268a65762a623bf30cc9fe79117" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/nvidia-curand-cu12/10.3.7.77/nvidia_curand_cu12-10.3.7.77-py3-none-manylinux_2_27_aarch64.whl", hash = "sha256:7b2ed8e95595c3591d984ea3603dd66fe6ce6812b886d59049988a712ed06b6e" },
+]
+
+[[package]]
+name = "nvidia-cusolver-cu12"
+version = "11.7.1.2"
+source = { registry = "http://nexus.hyperaccel.ai/repository/pypi-group/simple/" }
+dependencies = [
+    { name = "nvidia-cublas-cu12" },
+    { name = "nvidia-cusparse-cu12" },
+    { name = "nvidia-nvjitlink-cu12" },
+]
+wheels = [
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/nvidia-cusolver-cu12/11.7.1.2/nvidia_cusolver_cu12-11.7.1.2-py3-none-manylinux2014_aarch64.whl", hash = "sha256:0ce237ef60acde1efc457335a2ddadfd7610b892d94efee7b776c64bb1cac9e0" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/nvidia-cusolver-cu12/11.7.1.2/nvidia_cusolver_cu12-11.7.1.2-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:e9e49843a7707e42022babb9bcfa33c29857a93b88020c4e4434656a655b698c" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/nvidia-cusolver-cu12/11.7.1.2/nvidia_cusolver_cu12-11.7.1.2-py3-none-manylinux2014_x86_64.whl", hash = "sha256:6cf28f17f64107a0c4d7802be5ff5537b2130bfc112f25d5a30df227058ca0e6" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/nvidia-cusolver-cu12/11.7.1.2/nvidia_cusolver_cu12-11.7.1.2-py3-none-manylinux_2_27_aarch64.whl", hash = "sha256:dbbe4fc38ec1289c7e5230e16248365e375c3673c9c8bac5796e2e20db07f56e" },
+]
+
+[[package]]
+name = "nvidia-cusparse-cu12"
+version = "12.5.4.2"
+source = { registry = "http://nexus.hyperaccel.ai/repository/pypi-group/simple/" }
+dependencies = [
+    { name = "nvidia-nvjitlink-cu12" },
+]
+wheels = [
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/nvidia-cusparse-cu12/12.5.4.2/nvidia_cusparse_cu12-12.5.4.2-py3-none-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:d25b62fb18751758fe3c93a4a08eff08effedfe4edf1c6bb5afd0890fe88f887" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/nvidia-cusparse-cu12/12.5.4.2/nvidia_cusparse_cu12-12.5.4.2-py3-none-manylinux2014_aarch64.whl", hash = "sha256:7aa32fa5470cf754f72d1116c7cbc300b4e638d3ae5304cfa4a638a5b87161b1" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/nvidia-cusparse-cu12/12.5.4.2/nvidia_cusparse_cu12-12.5.4.2-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:7556d9eca156e18184b94947ade0fba5bb47d69cec46bf8660fd2c71a4b48b73" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/nvidia-cusparse-cu12/12.5.4.2/nvidia_cusparse_cu12-12.5.4.2-py3-none-manylinux2014_x86_64.whl", hash = "sha256:23749a6571191a215cb74d1cdbff4a86e7b19f1200c071b3fcf844a5bea23a2f" },
+]
+
+[[package]]
+name = "nvidia-cusparselt-cu12"
+version = "0.7.1"
+source = { registry = "http://nexus.hyperaccel.ai/repository/pypi-group/simple/" }
+wheels = [
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/nvidia-cusparselt-cu12/0.7.1/nvidia_cusparselt_cu12-0.7.1-py3-none-manylinux2014_aarch64.whl", hash = "sha256:8878dce784d0fac90131b6817b607e803c36e629ba34dc5b433471382196b6a5" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/nvidia-cusparselt-cu12/0.7.1/nvidia_cusparselt_cu12-0.7.1-py3-none-manylinux2014_x86_64.whl", hash = "sha256:f1bb701d6b930d5a7cea44c19ceb973311500847f81b634d802b7b539dc55623" },
+]
+
+[[package]]
+name = "nvidia-nccl-cu12"
+version = "2.27.5"
+source = { registry = "http://nexus.hyperaccel.ai/repository/pypi-group/simple/" }
+wheels = [
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/nvidia-nccl-cu12/2.27.5/nvidia_nccl_cu12-2.27.5-py3-none-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:31432ad4d1fb1004eb0c56203dc9bc2178a1ba69d1d9e02d64a6938ab5e40e7a" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/nvidia-nccl-cu12/2.27.5/nvidia_nccl_cu12-2.27.5-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:ad730cf15cb5d25fe849c6e6ca9eb5b76db16a80f13f425ac68d8e2e55624457" },
+]
+
+[[package]]
+name = "nvidia-nvjitlink-cu12"
+version = "12.6.85"
+source = { registry = "http://nexus.hyperaccel.ai/repository/pypi-group/simple/" }
+wheels = [
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/nvidia-nvjitlink-cu12/12.6.85/nvidia_nvjitlink_cu12-12.6.85-py3-none-manylinux2010_x86_64.manylinux_2_12_x86_64.whl", hash = "sha256:eedc36df9e88b682efe4309aa16b5b4e78c2407eac59e8c10a6a47535164369a" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/nvidia-nvjitlink-cu12/12.6.85/nvidia_nvjitlink_cu12-12.6.85-py3-none-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:cf4eaa7d4b6b543ffd69d6abfb11efdeb2db48270d94dfd3a452c24150829e41" },
+]
+
+[[package]]
+name = "nvidia-nvshmem-cu12"
+version = "3.4.5"
+source = { registry = "http://nexus.hyperaccel.ai/repository/pypi-group/simple/" }
+wheels = [
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/nvidia-nvshmem-cu12/3.4.5/nvidia_nvshmem_cu12-3.4.5-py3-none-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:0b48363fc6964dede448029434c6abed6c5e37f823cb43c3bcde7ecfc0457e15" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/nvidia-nvshmem-cu12/3.4.5/nvidia_nvshmem_cu12-3.4.5-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:042f2500f24c021db8a06c5eec2539027d57460e1c1a762055a6554f72c369bd" },
+]
+
+[[package]]
+name = "nvidia-nvtx-cu12"
+version = "12.6.77"
+source = { registry = "http://nexus.hyperaccel.ai/repository/pypi-group/simple/" }
+wheels = [
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/nvidia-nvtx-cu12/12.6.77/nvidia_nvtx_cu12-12.6.77-py3-none-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:f44f8d86bb7d5629988d61c8d3ae61dddb2015dee142740536bc7481b022fe4b" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/nvidia-nvtx-cu12/12.6.77/nvidia_nvtx_cu12-12.6.77-py3-none-manylinux2014_aarch64.whl", hash = "sha256:adcaabb9d436c9761fca2b13959a2d237c5f9fd406c8e4b723c695409ff88059" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/nvidia-nvtx-cu12/12.6.77/nvidia_nvtx_cu12-12.6.77-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:b90bed3df379fa79afbd21be8e04a0314336b8ae16768b58f2d34cb1d04cd7d2" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/nvidia-nvtx-cu12/12.6.77/nvidia_nvtx_cu12-12.6.77-py3-none-manylinux2014_x86_64.whl", hash = "sha256:6574241a3ec5fdc9334353ab8c479fe75841dbe8f4532a8fc97ce63503330ba1" },
+]
+
+[[package]]
+name = "packaging"
+version = "26.2"
+source = { registry = "http://nexus.hyperaccel.ai/repository/pypi-group/simple/" }
+sdist = { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/packaging/26.2/packaging-26.2.tar.gz", hash = "sha256:ff452ff5a3e828ce110190feff1178bb1f2ea2281fa2075aadb987c2fb221661" }
+wheels = [
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/packaging/26.2/packaging-26.2-py3-none-any.whl", hash = "sha256:5fc45236b9446107ff2415ce77c807cee2862cb6fac22b8a73826d0693b0980e" },
+]
+
+[[package]]
+name = "pillow"
+version = "12.0.0"
+source = { registry = "http://nexus.hyperaccel.ai/repository/pypi-group/simple/" }
+sdist = { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/pillow/12.0.0/pillow-12.0.0.tar.gz", hash = "sha256:87d4f8125c9988bfbed67af47dd7a953e2fc7b0cc1e7800ec6d2080d490bb353" }
+wheels = [
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/pillow/12.0.0/pillow-12.0.0-cp310-cp310-macosx_10_10_x86_64.whl", hash = "sha256:3adfb466bbc544b926d50fe8f4a4e6abd8c6bffd28a26177594e6e9b2b76572b" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/pillow/12.0.0/pillow-12.0.0-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:1ac11e8ea4f611c3c0147424eae514028b5e9077dd99ab91e1bd7bc33ff145e1" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/pillow/12.0.0/pillow-12.0.0-cp310-cp310-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:d49e2314c373f4c2b39446fb1a45ed333c850e09d0c59ac79b72eb3b95397363" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/pillow/12.0.0/pillow-12.0.0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:c7b2a63fd6d5246349f3d3f37b14430d73ee7e8173154461785e43036ffa96ca" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/pillow/12.0.0/pillow-12.0.0-cp310-cp310-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:d64317d2587c70324b79861babb9c09f71fbb780bad212018874b2c013d8600e" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/pillow/12.0.0/pillow-12.0.0-cp310-cp310-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:d77153e14b709fd8b8af6f66a3afbb9ed6e9fc5ccf0b6b7e1ced7b036a228782" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/pillow/12.0.0/pillow-12.0.0-cp310-cp310-musllinux_1_2_aarch64.whl", hash = "sha256:32ed80ea8a90ee3e6fa08c21e2e091bba6eda8eccc83dbc34c95169507a91f10" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/pillow/12.0.0/pillow-12.0.0-cp310-cp310-musllinux_1_2_x86_64.whl", hash = "sha256:c828a1ae702fc712978bda0320ba1b9893d99be0badf2647f693cc01cf0f04fa" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/pillow/12.0.0/pillow-12.0.0-cp310-cp310-win32.whl", hash = "sha256:bd87e140e45399c818fac4247880b9ce719e4783d767e030a883a970be632275" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/pillow/12.0.0/pillow-12.0.0-cp310-cp310-win_amd64.whl", hash = "sha256:455247ac8a4cfb7b9bc45b7e432d10421aea9fc2e74d285ba4072688a74c2e9d" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/pillow/12.0.0/pillow-12.0.0-cp310-cp310-win_arm64.whl", hash = "sha256:6ace95230bfb7cd79ef66caa064bbe2f2a1e63d93471c3a2e1f1348d9f22d6b7" },
+]
+
+[[package]]
+name = "psutil"
+version = "7.2.2"
+source = { registry = "http://nexus.hyperaccel.ai/repository/pypi-group/simple/" }
+sdist = { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/psutil/7.2.2/psutil-7.2.2.tar.gz", hash = "sha256:0746f5f8d406af344fd547f1c8daa5f5c33dbc293bb8d6a16d80b4bb88f59372" }
+wheels = [
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/psutil/7.2.2/psutil-7.2.2-cp36-abi3-macosx_10_9_x86_64.whl", hash = "sha256:ed0cace939114f62738d808fdcecd4c869222507e266e574799e9c0faa17d486" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/psutil/7.2.2/psutil-7.2.2-cp36-abi3-macosx_11_0_arm64.whl", hash = "sha256:1a7b04c10f32cc88ab39cbf606e117fd74721c831c98a27dc04578deb0c16979" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/psutil/7.2.2/psutil-7.2.2-cp36-abi3-manylinux2010_x86_64.manylinux_2_12_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:076a2d2f923fd4821644f5ba89f059523da90dc9014e85f8e45a5774ca5bc6f9" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/psutil/7.2.2/psutil-7.2.2-cp36-abi3-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:b0726cecd84f9474419d67252add4ac0cd9811b04d61123054b9fb6f57df6e9e" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/psutil/7.2.2/psutil-7.2.2-cp36-abi3-musllinux_1_2_aarch64.whl", hash = "sha256:fd04ef36b4a6d599bbdb225dd1d3f51e00105f6d48a28f006da7f9822f2606d8" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/psutil/7.2.2/psutil-7.2.2-cp36-abi3-musllinux_1_2_x86_64.whl", hash = "sha256:b58fabe35e80b264a4e3bb23e6b96f9e45a3df7fb7eed419ac0e5947c61e47cc" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/psutil/7.2.2/psutil-7.2.2-cp37-abi3-win_amd64.whl", hash = "sha256:eb7e81434c8d223ec4a219b5fc1c47d0417b12be7ea866e24fb5ad6e84b3d988" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/psutil/7.2.2/psutil-7.2.2-cp37-abi3-win_arm64.whl", hash = "sha256:8c233660f575a5a89e6d4cb65d9f938126312bca76d8fe087b947b3a1aaac9ee" },
+]
+
+[[package]]
+name = "pyyaml"
+version = "6.0.3"
+source = { registry = "http://nexus.hyperaccel.ai/repository/pypi-group/simple/" }
+sdist = { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/pyyaml/6.0.3/pyyaml-6.0.3.tar.gz", hash = "sha256:d76623373421df22fb4cf8817020cbb7ef15c725b9d5e45f17e189bfc384190f" }
+wheels = [
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/pyyaml/6.0.3/pyyaml-6.0.3-cp310-cp310-macosx_10_13_x86_64.whl", hash = "sha256:214ed4befebe12df36bcc8bc2b64b396ca31be9304b8f59e25c11cf94a4c033b" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/pyyaml/6.0.3/pyyaml-6.0.3-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:02ea2dfa234451bbb8772601d7b8e426c2bfa197136796224e50e35a78777956" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/pyyaml/6.0.3/pyyaml-6.0.3-cp310-cp310-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:b30236e45cf30d2b8e7b3e85881719e98507abed1011bf463a8fa23e9c3e98a8" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/pyyaml/6.0.3/pyyaml-6.0.3-cp310-cp310-manylinux2014_s390x.manylinux_2_17_s390x.manylinux_2_28_s390x.whl", hash = "sha256:66291b10affd76d76f54fad28e22e51719ef9ba22b29e1d7d03d6777a9174198" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/pyyaml/6.0.3/pyyaml-6.0.3-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:9c7708761fccb9397fe64bbc0395abcae8c4bf7b0eac081e12b809bf47700d0b" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/pyyaml/6.0.3/pyyaml-6.0.3-cp310-cp310-musllinux_1_2_aarch64.whl", hash = "sha256:418cf3f2111bc80e0933b2cd8cd04f286338bb88bdc7bc8e6dd775ebde60b5e0" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/pyyaml/6.0.3/pyyaml-6.0.3-cp310-cp310-musllinux_1_2_x86_64.whl", hash = "sha256:5e0b74767e5f8c593e8c9b5912019159ed0533c70051e9cce3e8b6aa699fcd69" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/pyyaml/6.0.3/pyyaml-6.0.3-cp310-cp310-win32.whl", hash = "sha256:28c8d926f98f432f88adc23edf2e6d4921ac26fb084b028c733d01868d19007e" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/pyyaml/6.0.3/pyyaml-6.0.3-cp310-cp310-win_amd64.whl", hash = "sha256:bdb2c67c6c1390b63c6ff89f210c8fd09d9a1217a465701eac7316313c915e4c" },
+]
+
+[[package]]
+name = "regex"
+version = "2026.5.9"
+source = { registry = "http://nexus.hyperaccel.ai/repository/pypi-group/simple/" }
+sdist = { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/regex/2026.5.9/regex-2026.5.9.tar.gz", hash = "sha256:a8234aa23ec39894bfe4a3f1b85616a7032481964a13ac6fc9f10de4f6fca270" }
+wheels = [
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/regex/2026.5.9/regex-2026.5.9-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:a9e1328e17c84c1a5d22ec9f785ecef4a967fab9a42b6a8dc3bcbebd0a0c9e44" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/regex/2026.5.9/regex-2026.5.9-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:bfe1ce50cbfb569d74e1e4337da6468961f31dbea55fd85aa5de59c0947a805a" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/regex/2026.5.9/regex-2026.5.9-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:15ee42209947f4ca045412eae98416317238163618ace2a8e54f99586a466733" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/regex/2026.5.9/regex-2026.5.9-cp310-cp310-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:b4bb445ff3f725f59df8f6014edb547ee928ec7023a774f6a39a3f953038cbb2" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/regex/2026.5.9/regex-2026.5.9-cp310-cp310-manylinux2014_ppc64le.manylinux_2_17_ppc64le.manylinux_2_28_ppc64le.whl", hash = "sha256:446ddd671e43ab535810c4b21cff7104945c701d4a14d1e6d1cd6f4e445a8bea" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/regex/2026.5.9/regex-2026.5.9-cp310-cp310-manylinux2014_s390x.manylinux_2_17_s390x.manylinux_2_28_s390x.whl", hash = "sha256:7b92817338591505f282cf3864c145244b1edcf5381d237038df955001091538" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/regex/2026.5.9/regex-2026.5.9-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:d6b8a143aca6c39b446ea8092cde25cc8fe9304d4f5fecfbc1a9dbb0282703c2" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/regex/2026.5.9/regex-2026.5.9-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:0f03aa6898aaaac4592479821df16e68e8d0e29e903e65d8f2dfb2f19028a989" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/regex/2026.5.9/regex-2026.5.9-cp310-cp310-manylinux_2_31_riscv64.manylinux_2_39_riscv64.whl", hash = "sha256:ed457d8e98ae812ed7732bef7bf78de78e834eae0372a74e23ca90ef21d910f9" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/regex/2026.5.9/regex-2026.5.9-cp310-cp310-musllinux_1_2_aarch64.whl", hash = "sha256:71b61c5bfe1c806332defc42ad6c780b3c55f661986d7f40283a3a88274b4c00" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/regex/2026.5.9/regex-2026.5.9-cp310-cp310-musllinux_1_2_ppc64le.whl", hash = "sha256:3b1e39888c5e0c7d92cea4fc777396c4a90363b05de75d02eb459a4752200808" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/regex/2026.5.9/regex-2026.5.9-cp310-cp310-musllinux_1_2_riscv64.whl", hash = "sha256:6ba42b2e7e7f46cf68cc6a5ca36fa07959f9bbd9c6bdcc47b6ee76549a590248" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/regex/2026.5.9/regex-2026.5.9-cp310-cp310-musllinux_1_2_s390x.whl", hash = "sha256:c010eb8caca74bdb40c07498d7ece26b4428fd3f04aa8a72c9ac6f79e8faaac6" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/regex/2026.5.9/regex-2026.5.9-cp310-cp310-musllinux_1_2_x86_64.whl", hash = "sha256:a6a563446a41adc451393dc6b8e6ad87979efaee3c8738690a8d1b08ebead1b4" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/regex/2026.5.9/regex-2026.5.9-cp310-cp310-win32.whl", hash = "sha256:954cc214c04663ee6d266fc61739cad83054683048de65c5bd1d640ad28098ac" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/regex/2026.5.9/regex-2026.5.9-cp310-cp310-win_amd64.whl", hash = "sha256:b310768746dd314ea6e2ff4cc89ef215426813396ff4e94ee8e6f7096c8b6e03" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/regex/2026.5.9/regex-2026.5.9-cp310-cp310-win_arm64.whl", hash = "sha256:19c16ceb4a267a8789e25733e583983eeab9f0f8664e66b0bd1c5d21f14c2d4b" },
+]
+
+[[package]]
+name = "requests"
+version = "2.34.2"
+source = { registry = "http://nexus.hyperaccel.ai/repository/pypi-group/simple/" }
+dependencies = [
+    { name = "certifi" },
+    { name = "charset-normalizer" },
+    { name = "idna" },
+    { name = "urllib3" },
+]
+sdist = { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/requests/2.34.2/requests-2.34.2.tar.gz", hash = "sha256:f288924cae4e29463698d6d60bc6a4da69c89185ad1e0bcc4104f584e960b9ed" }
+wheels = [
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/requests/2.34.2/requests-2.34.2-py3-none-any.whl", hash = "sha256:2a0d60c172f83ac6ab31e4554906c0f3b3588d37b5cb939b1c061f4907e278e0" },
+]
+
+[[package]]
+name = "safetensors"
+version = "0.7.0"
+source = { registry = "http://nexus.hyperaccel.ai/repository/pypi-group/simple/" }
+sdist = { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/safetensors/0.7.0/safetensors-0.7.0.tar.gz", hash = "sha256:07663963b67e8bd9f0b8ad15bb9163606cd27cc5a1b96235a50d8369803b96b0" }
+wheels = [
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/safetensors/0.7.0/safetensors-0.7.0-cp38-abi3-macosx_10_12_x86_64.whl", hash = "sha256:c82f4d474cf725255d9e6acf17252991c3c8aac038d6ef363a4bf8be2f6db517" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/safetensors/0.7.0/safetensors-0.7.0-cp38-abi3-macosx_11_0_arm64.whl", hash = "sha256:94fd4858284736bb67a897a41608b5b0c2496c9bdb3bf2af1fa3409127f20d57" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/safetensors/0.7.0/safetensors-0.7.0-cp38-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:e07d91d0c92a31200f25351f4acb2bc6aff7f48094e13ebb1d0fb995b54b6542" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/safetensors/0.7.0/safetensors-0.7.0-cp38-abi3-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:8469155f4cb518bafb4acf4865e8bb9d6804110d2d9bdcaa78564b9fd841e104" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/safetensors/0.7.0/safetensors-0.7.0-cp38-abi3-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:54bef08bf00a2bff599982f6b08e8770e09cc012d7bba00783fc7ea38f1fb37d" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/safetensors/0.7.0/safetensors-0.7.0-cp38-abi3-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:42cb091236206bb2016d245c377ed383aa7f78691748f3bb6ee1bfa51ae2ce6a" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/safetensors/0.7.0/safetensors-0.7.0-cp38-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:dac7252938f0696ddea46f5e855dd3138444e82236e3be475f54929f0c510d48" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/safetensors/0.7.0/safetensors-0.7.0-cp38-abi3-manylinux_2_5_i686.manylinux1_i686.whl", hash = "sha256:1d060c70284127fa805085d8f10fbd0962792aed71879d00864acda69dbab981" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/safetensors/0.7.0/safetensors-0.7.0-cp38-abi3-musllinux_1_2_aarch64.whl", hash = "sha256:cdab83a366799fa730f90a4ebb563e494f28e9e92c4819e556152ad55e43591b" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/safetensors/0.7.0/safetensors-0.7.0-cp38-abi3-musllinux_1_2_armv7l.whl", hash = "sha256:672132907fcad9f2aedcb705b2d7b3b93354a2aec1b2f706c4db852abe338f85" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/safetensors/0.7.0/safetensors-0.7.0-cp38-abi3-musllinux_1_2_i686.whl", hash = "sha256:5d72abdb8a4d56d4020713724ba81dac065fedb7f3667151c4a637f1d3fb26c0" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/safetensors/0.7.0/safetensors-0.7.0-cp38-abi3-musllinux_1_2_x86_64.whl", hash = "sha256:b0f6d66c1c538d5a94a73aa9ddca8ccc4227e6c9ff555322ea40bdd142391dd4" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/safetensors/0.7.0/safetensors-0.7.0-cp38-abi3-win32.whl", hash = "sha256:c74af94bf3ac15ac4d0f2a7c7b4663a15f8c2ab15ed0fc7531ca61d0835eccba" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/safetensors/0.7.0/safetensors-0.7.0-cp38-abi3-win_amd64.whl", hash = "sha256:d1239932053f56f3456f32eb9625590cc7582e905021f94636202a864d470755" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/safetensors/0.7.0/safetensors-0.7.0-pp310-pypy310_pp73-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:f4729811a6640d019a4b7ba8638ee2fd21fa5ca8c7e7bdf0fed62068fcaac737" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/safetensors/0.7.0/safetensors-0.7.0-pp310-pypy310_pp73-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:12f49080303fa6bb424b362149a12949dfbbf1e06811a88f2307276b0c131afd" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/safetensors/0.7.0/safetensors-0.7.0-pp310-pypy310_pp73-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:0071bffba4150c2f46cae1432d31995d77acfd9f8db598b5d1a2ce67e8440ad2" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/safetensors/0.7.0/safetensors-0.7.0-pp310-pypy310_pp73-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:473b32699f4200e69801bf5abf93f1a4ecd432a70984df164fc22ccf39c4a6f3" },
+]
+
+[[package]]
+name = "sympy"
+version = "1.13.3"
+source = { registry = "http://nexus.hyperaccel.ai/repository/pypi-group/simple/" }
+dependencies = [
+    { name = "mpmath" },
+]
+sdist = { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/sympy/1.13.3/sympy-1.13.3.tar.gz", hash = "sha256:b27fd2c6530e0ab39e275fc9b683895367e51d5da91baa8d3d64db2565fec4d9" }
+wheels = [
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/sympy/1.13.3/sympy-1.13.3-py3-none-any.whl", hash = "sha256:54612cf55a62755ee71824ce692986f23c88ffa77207b30c1368eda4a7060f73" },
+]
+
+[[package]]
+name = "tokenizers"
+version = "0.22.2"
+source = { registry = "http://nexus.hyperaccel.ai/repository/pypi-group/simple/" }
+dependencies = [
+    { name = "huggingface-hub" },
+]
+sdist = { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/tokenizers/0.22.2/tokenizers-0.22.2.tar.gz", hash = "sha256:473b83b915e547aa366d1eee11806deaf419e17be16310ac0a14077f1e28f917" }
+wheels = [
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/tokenizers/0.22.2/tokenizers-0.22.2-cp39-abi3-macosx_10_12_x86_64.whl", hash = "sha256:544dd704ae7238755d790de45ba8da072e9af3eea688f698b137915ae959281c" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/tokenizers/0.22.2/tokenizers-0.22.2-cp39-abi3-macosx_11_0_arm64.whl", hash = "sha256:1e418a55456beedca4621dbab65a318981467a2b188e982a23e117f115ce5001" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/tokenizers/0.22.2/tokenizers-0.22.2-cp39-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:2249487018adec45d6e3554c71d46eb39fa8ea67156c640f7513eb26f318cec7" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/tokenizers/0.22.2/tokenizers-0.22.2-cp39-abi3-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:25b85325d0815e86e0bac263506dd114578953b7b53d7de09a6485e4a160a7dd" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/tokenizers/0.22.2/tokenizers-0.22.2-cp39-abi3-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:bfb88f22a209ff7b40a576d5324bf8286b519d7358663db21d6246fb17eea2d5" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/tokenizers/0.22.2/tokenizers-0.22.2-cp39-abi3-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:1c774b1276f71e1ef716e5486f21e76333464f47bece56bbd554485982a9e03e" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/tokenizers/0.22.2/tokenizers-0.22.2-cp39-abi3-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:df6c4265b289083bf710dff49bc51ef252f9d5be33a45ee2bed151114a56207b" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/tokenizers/0.22.2/tokenizers-0.22.2-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:369cc9fc8cc10cb24143873a0d95438bb8ee257bb80c71989e3ee290e8d72c67" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/tokenizers/0.22.2/tokenizers-0.22.2-cp39-abi3-musllinux_1_2_aarch64.whl", hash = "sha256:29c30b83d8dcd061078b05ae0cb94d3c710555fbb44861139f9f83dcca3dc3e4" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/tokenizers/0.22.2/tokenizers-0.22.2-cp39-abi3-musllinux_1_2_armv7l.whl", hash = "sha256:37ae80a28c1d3265bb1f22464c856bd23c02a05bb211e56d0c5301a435be6c1a" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/tokenizers/0.22.2/tokenizers-0.22.2-cp39-abi3-musllinux_1_2_i686.whl", hash = "sha256:791135ee325f2336f498590eb2f11dc5c295232f288e75c99a36c5dbce63088a" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/tokenizers/0.22.2/tokenizers-0.22.2-cp39-abi3-musllinux_1_2_x86_64.whl", hash = "sha256:38337540fbbddff8e999d59970f3c6f35a82de10053206a7562f1ea02d046fa5" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/tokenizers/0.22.2/tokenizers-0.22.2-cp39-abi3-win32.whl", hash = "sha256:a6bf3f88c554a2b653af81f3204491c818ae2ac6fbc09e76ef4773351292bc92" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/tokenizers/0.22.2/tokenizers-0.22.2-cp39-abi3-win_amd64.whl", hash = "sha256:c9ea31edff2968b44a88f97d784c2f16dc0729b8b143ed004699ebca91f05c48" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/tokenizers/0.22.2/tokenizers-0.22.2-cp39-abi3-win_arm64.whl", hash = "sha256:9ce725d22864a1e965217204946f830c37876eee3b2ba6fc6255e8e903d5fcbc" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/tokenizers/0.22.2/tokenizers-0.22.2-pp310-pypy310_pp73-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:753d47ebd4542742ef9261d9da92cd545b2cacbb48349a1225466745bb866ec4" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/tokenizers/0.22.2/tokenizers-0.22.2-pp310-pypy310_pp73-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:e10bf9113d209be7cd046d40fbabbaf3278ff6d18eb4da4c500443185dc1896c" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/tokenizers/0.22.2/tokenizers-0.22.2-pp310-pypy310_pp73-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:64d94e84f6660764e64e7e0b22baa72f6cd942279fdbb21d46abd70d179f0195" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/tokenizers/0.22.2/tokenizers-0.22.2-pp310-pypy310_pp73-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:f01a9c019878532f98927d2bacb79bbb404b43d3437455522a00a30718cdedb5" },
+]
+
+[[package]]
+name = "torch"
+version = "2.10.0+cu126"
+source = { registry = "https://download.pytorch.org/whl/cu126" }
+dependencies = [
+    { name = "cuda-bindings", marker = "sys_platform == 'linux'" },
+    { name = "filelock" },
+    { name = "fsspec" },
+    { name = "jinja2" },
+    { name = "networkx" },
+    { name = "nvidia-cublas-cu12", marker = "sys_platform == 'linux'" },
+    { name = "nvidia-cuda-cupti-cu12", marker = "sys_platform == 'linux'" },
+    { name = "nvidia-cuda-nvrtc-cu12", marker = "sys_platform == 'linux'" },
+    { name = "nvidia-cuda-runtime-cu12", marker = "sys_platform == 'linux'" },
+    { name = "nvidia-cudnn-cu12", marker = "sys_platform == 'linux'" },
+    { name = "nvidia-cufft-cu12", marker = "sys_platform == 'linux'" },
+    { name = "nvidia-cufile-cu12", marker = "sys_platform == 'linux'" },
+    { name = "nvidia-curand-cu12", marker = "sys_platform == 'linux'" },
+    { name = "nvidia-cusolver-cu12", marker = "sys_platform == 'linux'" },
+    { name = "nvidia-cusparse-cu12", marker = "sys_platform == 'linux'" },
+    { name = "nvidia-cusparselt-cu12", marker = "sys_platform == 'linux'" },
+    { name = "nvidia-nccl-cu12", marker = "sys_platform == 'linux'" },
+    { name = "nvidia-nvjitlink-cu12", marker = "sys_platform == 'linux'" },
+    { name = "nvidia-nvshmem-cu12", marker = "sys_platform == 'linux'" },
+    { name = "nvidia-nvtx-cu12", marker = "sys_platform == 'linux'" },
+    { name = "sympy" },
+    { name = "triton", marker = "sys_platform == 'linux'" },
+    { name = "typing-extensions" },
+]
+wheels = [
+    { url = "https://download-r2.pytorch.org/whl/cu126/torch-2.10.0%2Bcu126-cp310-cp310-manylinux_2_28_aarch64.whl", hash = "sha256:dae63a4756c9c455f299309b7b093f1b7c3460e63b53769cab10543b51a1d827", upload-time = "2026-01-21T19:34:06Z" },
+    { url = "https://download-r2.pytorch.org/whl/cu126/torch-2.10.0%2Bcu126-cp310-cp310-manylinux_2_28_x86_64.whl", hash = "sha256:a256b51e8ca00770a47fe7ab865e3211d2a080d4f1cdc814cdcfb073b36cf1a1", upload-time = "2026-01-21T19:34:06Z" },
+    { url = "https://download-r2.pytorch.org/whl/cu126/torch-2.10.0%2Bcu126-cp310-cp310-win_amd64.whl", hash = "sha256:b91012be20b6c0370800ed7c153fd5b51582495f00f7341c38fa0cb6b9c9a968", upload-time = "2026-01-21T19:34:06Z" },
+]
+
+[[package]]
+name = "torchvision"
+version = "0.25.0+cu126"
+source = { registry = "https://download.pytorch.org/whl/cu126" }
+dependencies = [
+    { name = "numpy" },
+    { name = "pillow" },
+    { name = "torch" },
+]
+wheels = [
+    { url = "https://download-r2.pytorch.org/whl/cu126/torchvision-0.25.0%2Bcu126-cp310-cp310-manylinux_2_28_aarch64.whl", hash = "sha256:74cb9b5cf8ea52d5d6837356ad4efd87f7a208f45b6c50bc1b75cab00c071ab3", upload-time = "2026-01-21T22:37:00Z" },
+    { url = "https://download-r2.pytorch.org/whl/cu126/torchvision-0.25.0%2Bcu126-cp310-cp310-manylinux_2_28_x86_64.whl", hash = "sha256:02525b6a66df95c2b2a8ef9fdfc006e979ae4673e02fb8ecb492d4bdb40ce5c9", upload-time = "2026-01-21T22:37:00Z" },
+    { url = "https://download-r2.pytorch.org/whl/cu126/torchvision-0.25.0%2Bcu126-cp310-cp310-win_amd64.whl", hash = "sha256:a2e560743e6c8f0c2627accc47f33f0713734ca34de5866db5ac68da0826b0b8", upload-time = "2026-01-21T22:37:00Z" },
+]
+
+[[package]]
+name = "tqdm"
+version = "4.68.1"
+source = { registry = "http://nexus.hyperaccel.ai/repository/pypi-group/simple/" }
+dependencies = [
+    { name = "colorama", marker = "sys_platform == 'win32'" },
+]
+sdist = { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/tqdm/4.68.1/tqdm-4.68.1.tar.gz", hash = "sha256:fc163d96b287bd031e1aa24421ce4411b25559bd0a1be4fe649bdaa4d2c02bf5" }
+wheels = [
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/tqdm/4.68.1/tqdm-4.68.1-py3-none-any.whl", hash = "sha256:fea4a90e4023f764914569f7802a297277c5ab1a66be5144143e142e1a4031d8" },
+]
+
+[[package]]
+name = "transformers"
+version = "4.57.1"
+source = { registry = "http://nexus.hyperaccel.ai/repository/pypi-group/simple/" }
+dependencies = [
+    { name = "filelock" },
+    { name = "huggingface-hub" },
+    { name = "numpy" },
+    { name = "packaging" },
+    { name = "pyyaml" },
+    { name = "regex" },
+    { name = "requests" },
+    { name = "safetensors" },
+    { name = "tokenizers" },
+    { name = "tqdm" },
+]
+sdist = { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/transformers/4.57.1/transformers-4.57.1.tar.gz", hash = "sha256:f06c837959196c75039809636cd964b959f6604b75b8eeec6fdfc0440b89cc55" }
+wheels = [
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/transformers/4.57.1/transformers-4.57.1-py3-none-any.whl", hash = "sha256:b10d05da8fa67dc41644dbbf9bc45a44cb86ae33da6f9295f5fbf5b7890bd267" },
+]
+
+[[package]]
+name = "triton"
+version = "3.6.0"
+source = { registry = "http://nexus.hyperaccel.ai/repository/pypi-group/simple/" }
+wheels = [
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/triton/3.6.0/triton-3.6.0-cp310-cp310-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:6c723cfb12f6842a0ae94ac307dba7e7a44741d720a40cf0e270ed4a4e3be781" },
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/triton/3.6.0/triton-3.6.0-cp310-cp310-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:a6550fae429e0667e397e5de64b332d1e5695b73650ee75a6146e2e902770bea" },
+]
+
+[[package]]
+name = "typing-extensions"
+version = "4.15.0"
+source = { registry = "http://nexus.hyperaccel.ai/repository/pypi-group/simple/" }
+sdist = { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/typing-extensions/4.15.0/typing_extensions-4.15.0.tar.gz", hash = "sha256:0cea48d173cc12fa28ecabc3b837ea3cf6f38c6d1136f85cbaaf598984861466" }
+wheels = [
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/typing-extensions/4.15.0/typing_extensions-4.15.0-py3-none-any.whl", hash = "sha256:f0fa19c6845758ab08074a0cfa8b7aecb71c999ca73d62883bc25cc018c4e548" },
+]
+
+[[package]]
+name = "urllib3"
+version = "2.7.0"
+source = { registry = "http://nexus.hyperaccel.ai/repository/pypi-group/simple/" }
+sdist = { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/urllib3/2.7.0/urllib3-2.7.0.tar.gz", hash = "sha256:231e0ec3b63ceb14667c67be60f2f2c40a518cb38b03af60abc813da26505f4c" }
+wheels = [
+    { url = "http://nexus.hyperaccel.ai/repository/pypi-group/packages/urllib3/2.7.0/urllib3-2.7.0-py3-none-any.whl", hash = "sha256:9fb4c81ebbb1ce9531cce37674bbc6f1360472bc18ca9a553ede278ef7276897" },
+]
