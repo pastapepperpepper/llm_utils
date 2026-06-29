@@ -1,3 +1,9 @@
+import sys
+from pathlib import Path
+
+# config.py 는 프로젝트 루트(core/ 의 상위)에 있으므로 import 경로에 루트를 추가
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from config import (

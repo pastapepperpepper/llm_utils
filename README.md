@@ -1,6 +1,6 @@
 # LLM Utils
 
-`rt_simulator_integration` 테스트의 정답지(golden output)를 생성·검증하는 스크립트 모음.
+LLM tests의 정답지(golden output)를 생성·검증하는 스크립트 모음.
 
 ---
 
@@ -8,22 +8,20 @@
 
 ```
 llm_utils/
-├── config.py                # 모든 스크립트의 공통/개별 설정 (여기만 수정하면 됨)
-├── gen_llm_answer.py        # LLM 텍스트 생성 정답지 스크립트
-├── tokenizer_utils.py       # 토큰 ↔ ID 변환 유틸
-├── extract_layer_output.py  # 비전 인코더(Qwen3-VL) 레이어 출력(.pt) 추출
-├── layer_outputs/           # 추출된 텐서(.pt) 저장 위치
+├── config.py                # 모든 스크립트의 공통/개별 설정 (루트에 유지, 여기만 수정하면 됨)
+├── core/                    # 실행 스크립트 모음
+│   ├── gen_llm_answer.py    # LLM 텍스트 생성 정답지 스크립트
+│   └── tokenizer_utils.py   # 토큰 ↔ ID 변환 유틸
+├── input/                   # 입력 데이터 (이미지 등)
+│   └── 000000002149.jpg     # 샘플 입력 이미지
 ├── pyproject.toml           # 프로젝트 메타 + 의존성 (uv source of truth)
 ├── uv.lock                  # 잠금된 의존성 버전 (재현성 보장, 커밋함)
 ├── .python-version          # Python 3.10 고정 (hyperaccel-sdk와 일치)
 └── README.md
 ```
 
-> **버전 정책**: 이 스크립트들은 `hyperaccel-sdk`의 `rt_simulator_integration`
-> 정답지를 만든다. 정답지가 SDK 런타임과 어긋나지 않도록 Python·`torch`·
-> `transformers` 등 주요 패키지를 **SDK와 동일한 버전으로 고정**한다
-> (Python 3.10, torch 2.10.0, torchvision 0.25.0, transformers 4.57.1,
-> accelerate 1.13.0, pillow 12.0.0, numpy <2.0.0).
+> `core/` 안의 스크립트는 루트의 `config.py` 를 import 한다(스크립트 상단에서
+> 프로젝트 루트를 `sys.path` 에 추가하므로 어느 위치에서 실행하든 동작한다).
 
 ---
 
@@ -52,16 +50,15 @@ uv sync          # .venv 자동 생성 후 uv.lock 기준으로 패키지 설치
 가상환경을 직접 활성화하지 않고 `uv run`으로 실행하는 것을 권장한다(자동으로 `.venv` 사용).
 
 ```bash
-uv run gen_llm_answer.py        # LLM 텍스트 생성
-uv run tokenizer_utils.py       # 토큰 ↔ ID 변환
-uv run extract_layer_output.py  # 비전 레이어 출력 추출
+uv run core/gen_llm_answer.py   # LLM 텍스트 생성
+uv run core/tokenizer_utils.py  # 토큰 ↔ ID 변환
 ```
 
 또는 가상환경을 활성화한 뒤 실행해도 된다.
 
 ```bash
 source .venv/bin/activate
-python gen_llm_answer.py
+python core/gen_llm_answer.py
 ```
 
 ### 의존성 추가/변경
@@ -110,7 +107,7 @@ DEVICE      = "cuda"       # "cuda" 또는 "cpu"
 > - `DEVICE = "cpu"` 로 실행한 결과 → `rt_simulator_integration` 테스트의 **torch 모드** 정답지
 > - `DEVICE = "cuda"` 로 실행한 결과 → `rt_simulator_integration` 테스트의 **rtl 모드** 정답지
 
-### LLM 생성 설정 (`gen_llm_answer.py`)
+### LLM 생성 설정 (`core/gen_llm_answer.py`)
 
 ```python
 GEN_INPUT_MODE     = 1       # 0=텍스트(GEN_INPUT_TEXT), 1=토큰 ID(GEN_INPUT_IDS)
@@ -127,8 +124,3 @@ TOP_P              = 0.9
 ```
 
 > **정답지 생성 시 주의**: `DO_SAMPLE=False` (Greedy)로 실행해야 동일 입력에 항상 동일 결과가 나온다.
-
-### 비전 레이어 추출 설정 (`extract_layer_output.py`)
-
-`config.py`의 `EXTRACT_*` 변수로 모델/이미지/추출 대상을 지정한다. 자세한 내용은
-`config.py`의 주석을 참고한다.

@@ -1,3 +1,9 @@
+import sys
+from pathlib import Path
+
+# config.py 는 프로젝트 루트(core/ 의 상위)에 있으므로 import 경로에 루트를 추가
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
 from enum import IntEnum
 from transformers import AutoTokenizer
 from config import MODEL_ID, TOKENIZER_MODE, TOKENIZER_INPUT_IDS, TOKENIZER_INPUT_TOKENS
